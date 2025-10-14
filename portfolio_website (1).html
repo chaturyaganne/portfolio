@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chaturya Ganne - ML Engineer Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background: #f7fafc;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2b6cb0;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #4a5568;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #2b6cb0;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 2rem 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero .subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.95;
+        }
+
+        .hero .email {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Sections */
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 2rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2d3748;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        /* About */
+        .about-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            color: #2b6cb0;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-meta {
+            color: #718096;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .card ul {
+            margin-left: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .card li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            color: white;
+        }
+
+        .project-header h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .project-meta {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .project-body {
+            padding: 2rem;
+        }
+
+        .project-body ul {
+            margin-left: 1.5rem;
+        }
+
+        .project-body li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+        }
+
+        .skill-category h3 {
+            color: #2b6cb0;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .skill-tag {
+            background: #edf2f7;
+            color: #2d3748;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Achievements */
+        .achievements {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+        }
+
+        .achievements h3 {
+            color: #2b6cb0;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .achievements ul {
+            margin-left: 1.5rem;
+        }
+
+        .achievements li {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            color: #667eea;
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Chaturya Ganne</div>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Chaturya Ganne</h1>
+        <p class="subtitle">Machine Learning Engineer | Deep Learning | Computer Vision</p>
+        <p class="email">Email: chaturyaganne05@gmail.com</p>
+        <div class="hero-buttons">
+            <a href="https://www.linkedin.com/in/chaturya-ganne-6b85a7178/" target="_blank" class="btn btn-primary">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="https://scholar.google.com/citations?hl=en&user=SAiN8-oAAAAJ" target="_blank" class="btn btn-secondary">
+                <i class="fas fa-graduation-cap"></i> Google Scholar
+            </a>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <p>
+                Highly motivated Machine Learning Engineer (2027 graduate) with hands-on experience in building and deploying machine learning models, including deep learning, computer vision, and Generative AI applications. Proficient in Python, PyTorch, and TensorFlow, with a proven track record of translating business problems into technical solutions and optimizing model performance for real-time applications.
+            </p>
+        </div>
+    </section>
+
+    <section id="education">
+        <h2>Education</h2>
+        <div class="card-grid">
+            <div class="card">
+                <h3>University of Maryland, College Park</h3>
+                <div class="card-meta">Aug 2025 – Present</div>
+                <p><strong>Masters in Applied Machine Learning</strong></p>
+                <p style="margin-top: 1rem;"><strong>Coursework:</strong> Probability and Statistics, Principles of Machine Learning, Principles of Data Science</p>
+            </div>
+            <div class="card">
+                <h3>Mahindra University, Hyderabad</h3>
+                <div class="card-meta">Aug 2021 – Jun 2025</div>
+                <p><strong>Bachelor of Technology, Computer Science Engineering</strong></p>
+                <p style="margin-top: 0.5rem;"><strong>GPA:</strong> 8.58/10</p>
+                <p style="margin-top: 1rem;"><strong>Coursework:</strong> Data Structures and Algorithms, Deep Learning, Computer Vision</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2>Experience</h2>
+        <div class="card-grid">
+            <div class="card">
+                <h3>Data Science Intern</h3>
+                <div class="card-meta">AwoneDataSciences | Jun 2024 – Aug 2024 | Hyderabad, India</div>
+                <ul>
+                    <li>Applied advanced analytical methods by developing and fine-tuning transformer, diffuser, and vision models to enhance image processing capabilities</li>
+                    <li>Designed a virtual call assistant prototype, a consumer digital product, that integrated speech-to-text and text-to-speech functionalities for improved real-time inference</li>
+                    <li>Optimized Groq model implementations to accelerate model inference speeds in real-time environments</li>
+                    <li>Implemented document question answering solutions to streamline information retrieval tasks and enhance data-driven decision-making</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Virtual Call Assistant</h3>
+                    <div class="project-meta">Jun 2024 – Aug 2024</div>
+                </div>
+                <div class="project-body">
+                    <ul>
+                        <li>Designed and developed a consumer digital product that integrates speech-to-text and text-to-speech functionalities for real-time inference</li>
+                        <li>Implemented natural language processing capabilities for seamless voice interactions</li>
+                        <li>Optimized for low-latency performance in real-time communication scenarios</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Breast Cancer Classification</h3>
+                    <div class="project-meta">Machine Learning Project</div>
+                </div>
+                <div class="project-body">
+                    <ul>
+                        <li>Developed a machine learning model to classify breast cancer tumors as malignant or benign</li>
+                        <li>Utilized various classification algorithms including SVM, Random Forest, and Neural Networks</li>
+                        <li>Achieved high accuracy through feature engineering and hyperparameter optimization</li>
+                        <li>Applied cross-validation techniques to ensure model robustness and generalization</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Intelligent AI Language Learning Agent</h3>
+                    <div class="project-meta">Jun 2025 – July 2025</div>
+                </div>
+                <div class="project-body">
+                    <ul>
+                        <li>Developed an intelligent language learning AI agent with adaptive difficulty adjustment, achieving 94.9% engagement prediction accuracy and 52.5% difficulty optimization performance</li>
+                        <li>Worked with RandomForestRegressor and RandomForestClassifier models</li>
+                        <li>Integrated predictive analytics with real-time user behavior tracking to optimize learning outcomes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Smart Railway Safety System</h3>
+                    <div class="project-meta">Aug 2024 – May 2025</div>
+                </div>
+                <div class="project-body">
+                    <ul>
+                        <li>Developed a Computer Vision sensor system for obstacle detection and track health monitoring</li>
+                        <li>Integrated RT-DETR, YOLOv8, and MaskRCNN models to improve detection accuracy</li>
+                        <li><strong>Outcome:</strong> Accepted at IWSHM 2025, Stanford University</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Hyperparameter Optimization Research</h3>
+                    <div class="project-meta">Jan 2024 – Jun 2024</div>
+                </div>
+                <div class="project-body">
+                    <ul>
+                        <li>Researched techniques to obtain optimal hyperparameter combinations for improved model performance</li>
+                        <li>Worked with SVM, Decision Trees, and other ML algorithms</li>
+                        <li><strong>Outcome:</strong> Paper accepted at ICOAI 2024</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Data Science & Analytics</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Pandas</span>
+                    <span class="skill-tag">NumPy</span>
+                    <span class="skill-tag">Scikit-learn</span>
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">FastAPI</span>
+                    <span class="skill-tag">Matplotlib</span>
+                    <span class="skill-tag">Seaborn</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3>Machine Learning & Deep Learning</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">PyTorch</span>
+                    <span class="skill-tag">TensorFlow</span>
+                    <span class="skill-tag">Keras</span>
+                    <span class="skill-tag">Computer Vision</span>
+                    <span class="skill-tag">Deep Learning</span>
+                    <span class="skill-tag">Supervised Learning</span>
+                    <span class="skill-tag">Unsupervised Learning</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3>Big Data & Cloud</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Apache Spark</span>
+                    <span class="skill-tag">Scala</span>
+                    <span class="skill-tag">AWS</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3>Technical Tools</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Git</span>
+                    <span class="skill-tag">Docker</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3>Soft Skills</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Communication</span>
+                    <span class="skill-tag">Collaboration</span>
+                    <span class="skill-tag">Public Speaking</span>
+                    <span class="skill-tag">Data Visualization</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="achievements">
+        <h2>Achievements & Publications</h2>
+        <div class="achievements">
+            <h3>Awards & Recognition</h3>
+            <ul>
+                <li>Member of IET (Institution of Engineering and Technology) since April 2023</li>
+                <li>Received Merit Scholarship all four academic years at Mahindra University (Feb 2024 – Jun 2025)</li>
+                <li>Presented research paper at ICRESH 2024 held at Bhabha Atomic Research Centre (BARC), Mumbai (Feb 2024)</li>
+            </ul>
+
+            <h3 style="margin-top: 2rem;">Publications</h3>
+            <ul>
+                <li><strong><a href="https://www.dpi-proceedings.com/index.php/shm2025/article/view/37360" target="_blank" style="color: #2b6cb0; text-decoration: none;">Smart Railway Safety: Integrating Deep Learning with Vision Transformers for Obstacle Detection and Track Health Monitoring</a></strong> - Published at IWSHM 2025, Stanford University</li>
+                <li><strong><a href="https://www.dpi-proceedings.com/index.php/shm2025/article/view/37361" target="_blank" style="color: #2b6cb0; text-decoration: none;">Advanced Computer Vision Techniques for Real-Time Railway Safety Monitoring</a></strong> - Published at IWSHM 2025, Stanford University</li>
+                <li><strong>Time-Frequency Analysis of Strong Ground Motions from the 1989 Loma Prieta Earthquake</strong> - Research using Seismosignal software to convert FFTs to Continuous Wavelet transform for analyzing seismic risks</li>
+                <li><strong>Time-Frequency Analysis of Strong Ground Motions from the 1994 Northridge Earthquake</strong> - Research analyzing earthquake risks to buildings for better structural planning</li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="mailto:chaturyaganne05@gmail.com" class="social-link" title="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/chaturya-ganne-6b85a7178/" target="_blank" class="social-link" title="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://scholar.google.com/citations?hl=en&user=SAiN8-oAAAAJ" target="_blank" class="social-link" title="Google Scholar">
+                <i class="fas fa-graduation-cap"></i>
+            </a>
+        </div>
+        <p>&copy; 2025 Chaturya Ganne. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
