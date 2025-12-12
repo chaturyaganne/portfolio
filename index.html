@@ -102,6 +102,15 @@
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s;
+            cursor: pointer; /* Ensure buttons are clickable */
+        }
+        
+        /* New button style for projects */
+        .project-btn {
+            padding: 8px 15px !important; 
+            font-size: 0.9rem !important;
+            text-decoration: none;
+            border: 1px solid transparent;
         }
 
         .btn-primary {
@@ -238,6 +247,12 @@
 
         .project-body li {
             margin-bottom: 0.8rem;
+        }
+        
+        .project-body a.btn-secondary {
+            background: #edf2f7 !important;
+            color: #4a5568 !important;
+            border: 1px solid #ccc !important;
         }
 
         /* Skills */
@@ -424,6 +439,30 @@
     <section id="projects">
         <h2>Projects</h2>
         <div class="projects-grid">
+            
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>AI Medical Diagnosis Tool</h3>
+                    <div class="project-meta">Deep Learning, Grad-CAM, Generative AI (LLaMA)</div>
+                </div>
+                <div class="project-body">
+                    <ul>
+                        <li>Developed and deployed a full-stack medical assistant for chest X-ray analysis, combining Computer Vision with Generative AI.</li>
+                        <li>The system uses a **ResNet50 CNN** to detect 15 thoracic diseases (e.g., Pneumonia, Cardiomegaly).</li>
+                        <li>Implemented **Grad-CAM** for interpretability, visualizing the areas of interest in the X-ray image that inform the diagnosis.</li>
+                        <li>Integrates with **Llama 3.2 (via Hugging Face API)** to generate patient-friendly medical reports and power an interactive medical chatbot.</li>
+                    </ul>
+                    <div style="margin-top: 1rem; display: flex; gap: 1rem;">
+                        <a href="https://chaturyaganne.github.io/medical_diaganois_tool/" target="_blank" class="btn btn-primary project-btn">
+                            <i class="fas fa-desktop"></i> Live Demo
+                        </a>
+                        <a href="https://github.com/chaturyaganne/medical_diaganois_tool" target="_blank" class="btn btn-secondary project-btn">
+                            <i class="fab fa-github"></i> GitHub Repo
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <div class="project-card">
                 <div class="project-header">
                     <h3>Virtual Call Assistant</h3>
