@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chaturya Ganne </title>
+    <title>Chaturya Ganne — ML Engineer</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Darker+Grotesque:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -16,11 +16,7 @@
             --bg-gradient: linear-gradient(135deg, #0A0E27 0%, #1A1F3A 50%, #0F1729 100%);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Darker Grotesque', sans-serif;
@@ -30,16 +26,13 @@
             line-height: 1.6;
         }
 
-        /* Animated background */
         .bg-pattern {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: -1;
             opacity: 0.03;
-            background-image: 
+            background-image:
                 radial-gradient(circle at 20% 50%, var(--accent) 1px, transparent 1px),
                 radial-gradient(circle at 80% 80%, var(--accent-warm) 1px, transparent 1px);
             background-size: 50px 50px;
@@ -51,11 +44,9 @@
             50% { transform: translate(50px, 50px); }
         }
 
-        /* Navigation */
         nav {
             position: fixed;
-            top: 0;
-            width: 100%;
+            top: 0; width: 100%;
             padding: 1.5rem 5%;
             background: rgba(10, 14, 39, 0.8);
             backdrop-filter: blur(20px);
@@ -87,11 +78,7 @@
             background-clip: text;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
 
         .nav-links a {
             color: var(--text-secondary);
@@ -105,23 +92,16 @@
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
+            bottom: -5px; left: 0;
+            width: 0; height: 2px;
             background: var(--accent);
             transition: width 0.3s ease;
         }
 
-        .nav-links a:hover {
-            color: var(--text-primary);
-        }
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-links a:hover::after { width: 100%; }
 
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
+        /* Hero */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -130,11 +110,7 @@
             position: relative;
         }
 
-        .hero-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            width: 100%;
-        }
+        .hero-content { max-width: 1400px; margin: 0 auto; width: 100%; }
 
         .hero-tag {
             display: inline-block;
@@ -152,14 +128,8 @@
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h1 {
@@ -181,7 +151,7 @@
         .hero-subtitle {
             font-size: clamp(1.2rem, 3vw, 1.8rem);
             color: var(--text-secondary);
-            max-width: 700px;
+            max-width: 750px;
             margin-bottom: 3rem;
             font-weight: 400;
             animation: fadeInUp 0.8s ease-out 0.6s both;
@@ -229,16 +199,14 @@
             transform: translateY(-3px);
         }
 
-        /* Section Styling */
+        /* Sections */
         section {
             padding: 6rem 5%;
             max-width: 1400px;
             margin: 0 auto;
         }
 
-        .section-header {
-            margin-bottom: 4rem;
-        }
+        .section-header { margin-bottom: 4rem; }
 
         .section-tag {
             color: var(--accent);
@@ -263,7 +231,7 @@
             max-width: 700px;
         }
 
-        /* About Section */
+        /* About */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -306,16 +274,10 @@
             margin-bottom: 0.5rem;
         }
 
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 1rem;
-        }
+        .stat-label { color: var(--text-secondary); font-size: 1rem; }
 
         /* Education */
-        .education-cards {
-            display: grid;
-            gap: 2rem;
-        }
+        .education-cards { display: grid; gap: 2rem; }
 
         .edu-card {
             background: rgba(26, 31, 58, 0.4);
@@ -330,17 +292,13 @@
         .edu-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 0;
+            top: 0; left: 0;
+            width: 4px; height: 0;
             background: linear-gradient(135deg, var(--accent), var(--accent-warm));
             transition: height 0.4s ease;
         }
 
-        .edu-card:hover::before {
-            height: 100%;
-        }
+        .edu-card:hover::before { height: 100%; }
 
         .edu-card:hover {
             transform: translateX(10px);
@@ -364,14 +322,16 @@
         .edu-card .degree {
             font-size: 1.2rem;
             color: var(--accent);
-            margin-bottom: 1rem;
+            margin-bottom: 0.3rem;
         }
 
-        .edu-date {
-            color: var(--text-secondary);
+        .edu-card .gpa {
             font-size: 1rem;
-            white-space: nowrap;
+            font-weight: 700;
+            color: var(--accent-warm);
         }
+
+        .edu-date { color: var(--text-secondary); font-size: 1rem; white-space: nowrap; }
 
         .coursework {
             margin-top: 1rem;
@@ -379,15 +339,8 @@
             border-top: 1px solid rgba(0, 217, 255, 0.1);
         }
 
-        .coursework-label {
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .coursework-list {
-            color: var(--text-secondary);
-        }
+        .coursework-label { font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .coursework-list { color: var(--text-secondary); }
 
         /* Experience */
         .experience-timeline {
@@ -398,10 +351,8 @@
         .experience-timeline::before {
             content: '';
             position: absolute;
-            left: 0;
-            top: 0;
-            width: 2px;
-            height: 100%;
+            left: 0; top: 0;
+            width: 2px; height: 100%;
             background: linear-gradient(180deg, var(--accent), var(--accent-warm));
         }
 
@@ -418,10 +369,8 @@
         .exp-item::before {
             content: '';
             position: absolute;
-            left: -3.5rem;
-            top: 2rem;
-            width: 12px;
-            height: 12px;
+            left: -3.5rem; top: 2rem;
+            width: 12px; height: 12px;
             background: var(--accent);
             border-radius: 50%;
             border: 3px solid var(--primary);
@@ -440,16 +389,8 @@
             margin-bottom: 0.5rem;
         }
 
-        .company {
-            color: var(--accent);
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .exp-date {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
+        .company { color: var(--accent); font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .exp-date { color: var(--text-secondary); font-size: 0.95rem; }
 
         .exp-item ul {
             margin-top: 1.5rem;
@@ -457,10 +398,7 @@
             color: var(--text-secondary);
         }
 
-        .exp-item li {
-            margin-bottom: 0.8rem;
-            line-height: 1.6;
-        }
+        .exp-item li { margin-bottom: 0.8rem; line-height: 1.6; }
 
         /* Projects */
         .projects-grid {
@@ -477,23 +415,21 @@
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         .project-card::after {
             content: '';
             position: absolute;
-            top: 0;
-            right: 0;
-            width: 100px;
-            height: 100px;
+            top: 0; right: 0;
+            width: 100px; height: 100px;
             background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
             opacity: 0;
             transition: opacity 0.4s ease;
         }
 
-        .project-card:hover::after {
-            opacity: 0.1;
-        }
+        .project-card:hover::after { opacity: 0.1; }
 
         .project-card:hover {
             transform: translateY(-10px);
@@ -510,11 +446,12 @@
             font-size: 0.85rem;
             color: var(--accent-warm);
             margin-bottom: 1rem;
+            align-self: flex-start;
         }
 
         .project-card h3 {
             font-family: 'DM Serif Display', serif;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             margin-bottom: 1rem;
             color: var(--text-primary);
         }
@@ -523,14 +460,10 @@
             color: var(--text-secondary);
             line-height: 1.7;
             margin-bottom: 1.5rem;
+            flex-grow: 1;
         }
 
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
+        .tech-stack { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
 
         .tech-tag {
             padding: 0.3rem 0.8rem;
@@ -540,10 +473,7 @@
             color: var(--accent);
         }
 
-        .project-links {
-            display: flex;
-            gap: 1rem;
-        }
+        .project-links { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: auto; }
 
         .project-link {
             padding: 0.6rem 1.5rem;
@@ -588,11 +518,7 @@
             color: var(--accent);
         }
 
-        .skill-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.7rem;
-        }
+        .skill-list { display: flex; flex-wrap: wrap; gap: 0.7rem; }
 
         .skill-item {
             padding: 0.5rem 1.2rem;
@@ -611,10 +537,7 @@
         }
 
         /* Publications */
-        .publications-list {
-            display: grid;
-            gap: 2rem;
-        }
+        .publications-list { display: grid; gap: 2rem; }
 
         .pub-item {
             background: rgba(26, 31, 58, 0.4);
@@ -628,8 +551,7 @@
         .pub-item::before {
             content: '📄';
             position: absolute;
-            right: 2rem;
-            top: 2rem;
+            right: 2rem; top: 2rem;
             font-size: 2rem;
             opacity: 0.3;
         }
@@ -646,22 +568,14 @@
             padding-right: 3rem;
         }
 
-        .pub-venue {
-            color: var(--accent-warm);
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
+        .pub-venue { color: var(--accent-warm); font-weight: 600; margin-bottom: 0.5rem; }
+        .pub-doi { color: var(--text-secondary); font-size: 0.9rem; }
+        .pub-doi a { color: var(--accent); text-decoration: none; }
+        .pub-doi a:hover { text-decoration: underline; }
 
-        /* Contact Section */
-        .contact-content {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .contact-content h2 {
-            margin-bottom: 2rem;
-        }
+        /* Contact */
+        .contact-content { text-align: center; max-width: 800px; margin: 0 auto; }
+        .contact-content h2 { margin-bottom: 2rem; }
 
         .contact-info {
             display: flex;
@@ -690,11 +604,8 @@
             box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
         }
 
-        .contact-icon {
-            font-size: 1.5rem;
-        }
+        .contact-icon { font-size: 1.5rem; }
 
-        /* Footer */
         footer {
             text-align: center;
             padding: 3rem 5%;
@@ -702,49 +613,12 @@
             color: var(--text-secondary);
         }
 
-        /* Scroll Animations */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 0.8s ease-out forwards;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .experience-timeline {
-                padding-left: 2rem;
-            }
-
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            h2 {
-                font-size: 2rem;
-            }
-        }
-
-        /* Scroll indicator */
         .scroll-indicator {
             position: absolute;
             bottom: 2rem;
@@ -754,28 +628,28 @@
         }
 
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            40% {
-                transform: translateX(-50%) translateY(-10px);
-            }
-            60% {
-                transform: translateX(-50%) translateY(-5px);
-            }
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
         }
 
-        .scroll-indicator svg {
-            width: 30px;
-            height: 30px;
-            stroke: var(--accent);
+        .scroll-indicator svg { width: 30px; height: 30px; stroke: var(--accent); }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .about-grid { grid-template-columns: 1fr; }
+            .stats { grid-template-columns: 1fr; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .experience-timeline { padding-left: 2rem; }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
     <div class="bg-pattern"></div>
 
-    <!-- Navigation -->
     <nav>
         <div class="container">
             <div class="logo">CG</div>
@@ -785,22 +659,22 @@
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#skills">Skills</a></li>
+                <li><a href="#publications">Publications</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero">
         <div class="hero-content">
             <span class="hero-tag">Available for Internships 2026</span>
             <h1>
-                Hey, I'm <span class="gradient-text">Chaturya Ganne</span><br>
-                
+                Hey, I'm <span class="gradient-text">Chaturya Ganne</span>
             </h1>
             <p class="hero-subtitle">
-                Building intelligent systems with Deep Learning, Computer Vision, and Generative AI. 
-                Currently pursuing MS in Applied ML at University of Maryland.
+                Building intelligent systems with Deep Learning, Computer Vision, and Generative AI.
+                MS in Applied Machine Learning at University of Maryland · GPA 4.0 · 5 peer-reviewed publications including IWSHM 2025 at Stanford.
             </p>
             <div class="cta-buttons">
                 <a href="#projects" class="btn btn-primary">View My Work</a>
@@ -814,7 +688,7 @@
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- About -->
     <section id="about">
         <div class="section-header">
             <span class="section-tag">Get to Know Me</span>
@@ -823,35 +697,40 @@
         <div class="about-grid">
             <div class="about-text">
                 <p>
-                    I'm a highly motivated Machine Learning Engineer graduating in 2027, with hands-on experience 
-                    in building and deploying ML models. I specialize in deep learning, computer vision, and 
-                    Generative AI applications.
+                    I'm an ML/AI Engineer and MS Applied Machine Learning candidate (GPA 4.0) at the University of Maryland,
+                    with production experience building and deploying AI systems across computer vision, NLP, and generative AI.
                 </p>
                 <p>
-                    Proficient in Python, PyTorch, and TensorFlow, I have a proven track record of translating 
-                    complex business problems into elegant technical solutions and optimizing models for 
-                    real-time applications.
+                    I architect transformer and diffusion models in PyTorch, build RL-driven agentic pipelines with LangChain,
+                    and ship end-to-end MLOps workflows with MLflow and Docker — translating research into real, measurable impact.
                 </p>
                 <p>
-                    My work has been published at prestigious conferences including IWSHM 2025 at Stanford 
-                    University, and I'm passionate about pushing the boundaries of what's possible with AI.
+                    My work has been published at prestigious conferences including IWSHM 2025 at Stanford University.
+                    I'm passionate about applying ML to high-stakes domains like healthcare and safety-critical systems.
                 </p>
             </div>
             <div class="stats">
                 <div class="stat-item">
-                    <div class="stat-number">4+</div>
+                    <div class="stat-number">5+</div>
                     <div class="stat-label">Publications</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">6+</div>
+                    <div class="stat-number">8+</div>
                     <div class="stat-label">ML Projects</div>
                 </div>
-               
+                <div class="stat-item">
+                    <div class="stat-number">4.0</div>
+                    <div class="stat-label">GPA at UMD</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">25%</div>
+                    <div class="stat-label">Throughput Boost</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Education Section -->
+    <!-- Education -->
     <section id="education">
         <div class="section-header">
             <span class="section-tag">Academic Background</span>
@@ -862,33 +741,37 @@
                 <div class="edu-header">
                     <div>
                         <h3>University of Maryland, College Park</h3>
-                        <div class="degree">Masters in Applied Machine Learning</div>
+                        <div class="degree">M.S., Applied Machine Learning</div>
+                        <div class="gpa">GPA: 4.0 / 4.0</div>
                     </div>
                     <div class="edu-date">Aug 2025 – Present</div>
                 </div>
                 <div class="coursework">
                     <div class="coursework-label">Coursework:</div>
-                    <div class="coursework-list">Optimisation of Machine Learning Algorithms, Principles of Machine Learning,Computing Systems for Machine Learning</div>
+                    <div class="coursework-list">Optimization of ML Algorithms, Principles of Machine Learning, Computing Systems for ML, Probability & Statistics, Principles of Data Science</div>
                 </div>
             </div>
             <div class="edu-card">
                 <div class="edu-header">
                     <div>
                         <h3>Mahindra University, Hyderabad</h3>
-                        <div class="degree">Bachelor of Technology, Computer Science Engineering</div>
+                        <div class="degree">B.Tech., Computer Science Engineering</div>
                     </div>
                     <div class="edu-date">Aug 2021 – Jun 2025</div>
                 </div>
-             
                 <div class="coursework">
                     <div class="coursework-label">Coursework:</div>
-                    <div class="coursework-list">Data Structures and Algorithms, Deep Learning, Computer Vision</div>
+                    <div class="coursework-list">Data Structures & Algorithms, Deep Learning, Computer Vision</div>
+                </div>
+                <div class="coursework" style="border-top: none; padding-top: 0.5rem;">
+                    <div class="coursework-label" style="color: var(--accent-warm);">Awards:</div>
+                    <div class="coursework-list">Merit Scholarship all four years · IET Member since Apr 2023 · Presented at ICRESH 2024, BARC Mumbai</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Experience Section -->
+    <!-- Experience -->
     <section id="experience">
         <div class="section-header">
             <span class="section-tag">Professional Journey</span>
@@ -902,34 +785,38 @@
                     <div class="exp-date">Jun 2024 – Aug 2024 | Hyderabad, India</div>
                 </div>
                 <ul>
-                    <li>Applied advanced analytical methods by developing and fine-tuning transformer, diffuser, and vision models to enhance image processing capabilities</li>
-                    <li>Designed a virtual call assistant prototype that integrated speech-to-text and text-to-speech functionalities for improved real-time inference</li>
-                    <li>Optimized Groq model implementations to accelerate model inference speeds in real-time environments</li>
-                    <li>Implemented document question answering solutions to streamline information retrieval tasks and enhance data-driven decision-making</li>
+                    <li>Architected and fine-tuned transformer and diffusion models in PyTorch, boosting image processing throughput by <strong>25%</strong> across high-resolution datasets.</li>
+                    <li>Engineered a virtual call assistant for e-commerce customer support integrating STT/TTS and NLP, reducing real-time inference latency by <strong>150 ms</strong>.</li>
+                    <li>Optimized Groq model workloads using operations research techniques, achieving <strong>2× acceleration</strong> in production inference speed.</li>
+                    <li>Deployed document Q&A solutions backed by SQL data mining, cutting manual data search time by approximately <strong>40%</strong>.</li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
+    <!-- Projects -->
     <section id="projects">
         <div class="section-header">
             <span class="section-tag">Featured Work</span>
             <h2>Projects</h2>
         </div>
         <div class="projects-grid">
+
+            <!-- AI Medical Diagnosis Tool -->
             <div class="project-card">
                 <span class="project-tag">Featured</span>
                 <h3>AI Medical Diagnosis Tool</h3>
                 <p>
-                    Full-stack medical assistant for chest X-ray analysis combining Computer Vision with Generative AI. 
-                    Uses ResNet50 CNN to detect 15 thoracic diseases with Grad-CAM for interpretability.
+                    Chest X-ray diagnostic system using ResNet50 to detect 15 thoracic diseases with 92% AUC-ROC accuracy.
+                    Implemented Grad-CAM visual heatmaps for clinician interpretability and integrated LLaMA 3.2 via Hugging Face
+                    to automate radiology report generation — reducing draft time by 60%.
                 </p>
                 <div class="tech-stack">
-                    <span class="tech-tag">Deep Learning</span>
+                    <span class="tech-tag">PyTorch</span>
+                    <span class="tech-tag">ResNet50</span>
                     <span class="tech-tag">Grad-CAM</span>
                     <span class="tech-tag">LLaMA 3.2</span>
-                    <span class="tech-tag">PyTorch</span>
+                    <span class="tech-tag">Hugging Face</span>
                 </div>
                 <div class="project-links">
                     <a href="https://chaturyaganne.github.io/medical_diaganois_tool/" target="_blank" class="project-link">Live Demo</a>
@@ -937,77 +824,110 @@
                 </div>
             </div>
 
+            <!-- AdaptAlloc -->
             <div class="project-card">
-                <span class="project-tag">Published Research</span>
+                <span class="project-tag">RL + Computer Vision</span>
+                <h3>AdaptAlloc — Adaptive Object Detection</h3>
+                <p>
+                    A REINFORCE policy network that dynamically routes video frames to YOLOv8 (fast/low-energy) or RT-DETR
+                    (accurate/high-energy) based on a 9-dimensional scene complexity state vector including Shannon entropy
+                    and detection uncertainty. Reward = ΔF1 − λ·cost, updated every 8 frames. Live Streamlit dashboard
+                    benchmarks the adaptive policy against Always-YOLO and Always-RT-DETR baselines in real time.
+                </p>
+                <div class="tech-stack">
+                    <span class="tech-tag">REINFORCE</span>
+                    <span class="tech-tag">YOLOv8</span>
+                    <span class="tech-tag">RT-DETR</span>
+                    <span class="tech-tag">Streamlit</span>
+                    <span class="tech-tag">Docker</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/chaturyaganne/ADAPTIVE_ALLOC" target="_blank" class="project-link">GitHub</a>
+                </div>
+            </div>
+
+            <!-- IMRT Radiation Treatment -->
+            <div class="project-card">
+                <span class="project-tag">Optimization · Healthcare</span>
+                <h3>IMRT Radiation Treatment Planner</h3>
+                <p>
+                    Formulated Intensity-Modulated Radiation Therapy (IMRT) beamlet optimization as a convex program using
+                    CVXPY on the PortPy Lung_Patient_3 clinical dataset. Enforces clinical dose constraints
+                    (PTV ≥ 60 Gy, esophagus ≤ 45 Gy, spinal cord ≤ 30 Gy, lung mean ≤ 20 Gy). Introduced a combined
+                    spectral regularizer as a memory-efficient surrogate for nuclear norm minimization, reducing effective
+                    rank of the fluence matrix while maintaining tumour coverage (D95 ≥ 60 Gy).
+                </p>
+                <div class="tech-stack">
+                    <span class="tech-tag">CVXPY</span>
+                    <span class="tech-tag">Convex Optimization</span>
+                    <span class="tech-tag">PortPy</span>
+                    <span class="tech-tag">Spectral Regularization</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/chaturyaganne/Radiation_Treatment_Planning_Optimiser" target="_blank" class="project-link">GitHub</a>
+                </div>
+            </div>
+
+            <!-- Smart Railway Safety -->
+            <div class="project-card">
+                <span class="project-tag">Published Research · Stanford</span>
                 <h3>Smart Railway Safety System</h3>
                 <p>
-                    Computer Vision sensor system for obstacle detection and track health monitoring using RT-DETR, 
-                    YOLOv8, and MaskRCNN models. Accepted at IWSHM 2025, Stanford University.
+                    Multi-model CV sensor suite (RT-DETR + YOLOv8 + MaskRCNN) for obstacle detection and track health
+                    monitoring, boosting detection precision by 15%. Pioneered a Vision-Language Transformer (ViLT)
+                    fusion model for track risk scoring achieving F1 = 0.89. Accepted at IWSHM 2025, Stanford University.
                 </p>
                 <div class="tech-stack">
                     <span class="tech-tag">Computer Vision</span>
                     <span class="tech-tag">YOLOv8</span>
                     <span class="tech-tag">RT-DETR</span>
                     <span class="tech-tag">MaskRCNN</span>
+                    <span class="tech-tag">ViLT</span>
                 </div>
-                
             </div>
 
+            <!-- 3D Asset Generation -->
             <div class="project-card">
-                <h3>Intelligent Language Learning Agent</h3>
+                <span class="project-tag">Agentic AI · MLOps</span>
+                <h3>Autonomous 3D Asset Generation Agent</h3>
                 <p>
-                    AI agent with adaptive difficulty adjustment achieving 94.9% engagement prediction accuracy 
-                    and 52.5% difficulty optimization using RandomForest models.
+                    Multi-stage Agentic AI pipeline (LangChain) coupling a text-to-3D diffusion model with a Deep Q-Network
+                    (DQN) RL agent to autonomously generate and optimize mechanical designs. End-to-end MLOps pipeline
+                    with MLflow and Docker for reproducible, tracked deployment.
                 </p>
                 <div class="tech-stack">
-                    <span class="tech-tag">ML</span>
-                    <span class="tech-tag">Scikit-learn</span>
-                    <span class="tech-tag">Predictive Analytics</span>
+                    <span class="tech-tag">LangChain</span>
+                    <span class="tech-tag">Diffusion Models</span>
+                    <span class="tech-tag">DQN / RL</span>
+                    <span class="tech-tag">MLflow</span>
+                    <span class="tech-tag">Docker</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/chaturyaganne" target="_blank" class="project-link">GitHub</a>
                 </div>
             </div>
 
+            <!-- Hyperparameter Research -->
             <div class="project-card">
-                <h3>Virtual Call Assistant</h3>
-                <p>
-                    Consumer digital product integrating speech-to-text and text-to-speech functionalities 
-                    with NLP capabilities for seamless voice interactions.
-                </p>
-                <div class="tech-stack">
-                    <span class="tech-tag">NLP</span>
-                    <span class="tech-tag">Speech Recognition</span>
-                    <span class="tech-tag">Real-time Processing</span>
-                </div>
-            </div>
-
-            <div class="project-card">
+                <span class="project-tag">Published · ICOAI 2024</span>
                 <h3>Hyperparameter Optimization Research</h3>
                 <p>
-                    Research on techniques to obtain optimal hyperparameter combinations for improved ML model 
-                    performance. Paper accepted at ICOAI 2024.
+                    Applied Bayesian and grid-search hyperparameter optimization to ML algorithms for seismic time-series
+                    analysis. Published paper: <em>"Predicting Duration of Vertical Ground Motions for the Himalayan Region
+                    Using Machine Learning Techniques"</em> — accepted at ICOAI 2024 (11th International Conference on AI).
                 </p>
                 <div class="tech-stack">
-                    <span class="tech-tag">Research</span>
                     <span class="tech-tag">SVM</span>
                     <span class="tech-tag">Decision Trees</span>
+                    <span class="tech-tag">Bayesian Optimization</span>
+                    <span class="tech-tag">Time-Series</span>
                 </div>
             </div>
 
-            <div class="project-card">
-                <h3>Breast Cancer Classification</h3>
-                <p>
-                    Machine learning model classifying breast cancer tumors using SVM, Random Forest, and Neural 
-                    Networks with advanced feature engineering.
-                </p>
-                <div class="tech-stack">
-                    <span class="tech-tag">Classification</span>
-                    <span class="tech-tag">SVM</span>
-                    <span class="tech-tag">Neural Networks</span>
-                </div>
-            </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
+    <!-- Skills -->
     <section id="skills">
         <div class="section-header">
             <span class="section-tag">Technical Expertise</span>
@@ -1015,63 +935,77 @@
         </div>
         <div class="skills-grid">
             <div class="skill-category">
-                <h3>Data Science & Analytics</h3>
+                <h3>Languages</h3>
                 <div class="skill-list">
                     <span class="skill-item">Python</span>
-                    <span class="skill-item">Pandas</span>
-                    <span class="skill-item">NumPy</span>
-                    <span class="skill-item">Scikit-learn</span>
                     <span class="skill-item">SQL</span>
-                    <span class="skill-item">FastAPI</span>
-                    <span class="skill-item">Matplotlib</span>
-                    <span class="skill-item">Seaborn</span>
+                    <span class="skill-item">C</span>
+                    <span class="skill-item">C++</span>
+                    <span class="skill-item">Java</span>
                 </div>
             </div>
-
             <div class="skill-category">
-                <h3>Machine Learning & Deep Learning</h3>
+                <h3>ML / Deep Learning</h3>
                 <div class="skill-list">
                     <span class="skill-item">PyTorch</span>
                     <span class="skill-item">TensorFlow</span>
                     <span class="skill-item">Keras</span>
+                    <span class="skill-item">Scikit-learn</span>
+                    <span class="skill-item">Hugging Face</span>
+                    <span class="skill-item">Diffusion Models</span>
+                    <span class="skill-item">LLMs</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Agentic AI</h3>
+                <div class="skill-list">
+                    <span class="skill-item">LangChain</span>
+                    <span class="skill-item">LangGraph</span>
+                    <span class="skill-item">RAG</span>
+                    <span class="skill-item">Prompt Engineering</span>
+                    <span class="skill-item">LLaMA</span>
+                    <span class="skill-item">Groq</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>CV / NLP</h3>
+                <div class="skill-list">
                     <span class="skill-item">Computer Vision</span>
-                    <span class="skill-item">Deep Learning</span>
-                    <span class="skill-item">Supervised Learning</span>
-                    <span class="skill-item">Unsupervised Learning</span>
+                    <span class="skill-item">YOLO</span>
+                    <span class="skill-item">RT-DETR</span>
+                    <span class="skill-item">Grad-CAM</span>
+                    <span class="skill-item">ViLT</span>
+                    <span class="skill-item">NLP</span>
+                    <span class="skill-item">STT / TTS</span>
                 </div>
             </div>
-
             <div class="skill-category">
-                <h3>Big Data & Cloud</h3>
+                <h3>MLOps & Cloud</h3>
                 <div class="skill-list">
-                    <span class="skill-item">Apache Spark</span>
-                    <span class="skill-item">Scala</span>
-                    <span class="skill-item">AWS</span>
-                </div>
-            </div>
-
-            <div class="skill-category">
-                <h3>Technical Tools</h3>
-                <div class="skill-list">
-                    <span class="skill-item">Git</span>
+                    <span class="skill-item">MLflow</span>
                     <span class="skill-item">Docker</span>
+                    <span class="skill-item">AWS</span>
+                    <span class="skill-item">FastAPI</span>
+                    <span class="skill-item">Git</span>
+                    <span class="skill-item">REST APIs</span>
                 </div>
             </div>
-
             <div class="skill-category">
-                <h3>Soft Skills</h3>
+                <h3>Data & Optimization</h3>
                 <div class="skill-list">
-                    <span class="skill-item">Communication</span>
-                    <span class="skill-item">Collaboration</span>
-                    <span class="skill-item">Public Speaking</span>
-                    <span class="skill-item">Data Visualization</span>
+                    <span class="skill-item">Pandas</span>
+                    <span class="skill-item">NumPy</span>
+                    <span class="skill-item">CVXPY</span>
+                    <span class="skill-item">Power BI</span>
+                    <span class="skill-item">Matplotlib</span>
+                    <span class="skill-item">Seaborn</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Publications Section -->
-    <section>
+    <!-- Publications -->
+    <section id="publications">
         <div class="section-header">
             <span class="section-tag">Research Contributions</span>
             <h2>Publications & Achievements</h2>
@@ -1079,51 +1013,54 @@
         <div class="publications-list">
             <div class="pub-item">
                 <h3>Smart Railway Safety: Integrating Deep Learning with Vision Transformers for Obstacle Detection and Track Health Monitoring</h3>
-                <div class="pub-venue">IWSHM 2025, Stanford University</div>
-                <p style="color: var(--text-secondary);">Advanced computer vision techniques for real-time railway safety monitoring using state-of-the-art deep learning models.</p>
+                <div class="pub-venue">IWSHM 2025 · Stanford University</div>
+                <div class="pub-doi">doi: <a href="https://doi.org/10.12783/shm2025/37360" target="_blank">10.12783/shm2025/37360</a></div>
             </div>
-
             <div class="pub-item">
-                <h3>Advanced Computer Vision Techniques for Real-Time Railway Safety Monitoring</h3>
-                <div class="pub-venue">IWSHM 2025, Stanford University</div>
-                <p style="color: var(--text-secondary);">Research on integrating multiple CV models for comprehensive railway infrastructure monitoring.</p>
+                <h3>AI-Driven Railway Maintenance for Fault Identification Through Object Detection and Segmentation</h3>
+                <div class="pub-venue">IWSHM 2025 · Stanford University</div>
+                <div class="pub-doi">doi: <a href="https://doi.org/10.12783/shm2025/37361" target="_blank">10.12783/shm2025/37361</a></div>
             </div>
-
+            <div class="pub-item">
+                <h3>Predicting Duration of Vertical Ground Motions for the Himalayan Region Using Machine Learning Techniques</h3>
+                <div class="pub-venue">ICOAI 2024 — 11th International Conference on Artificial Intelligence</div>
+            </div>
             <div class="pub-item">
                 <h3>Time-Frequency Analysis of Strong Ground Motions from the 1989 Loma Prieta Earthquake</h3>
                 <div class="pub-venue">Published Research</div>
-                <p style="color: var(--text-secondary);">Using Seismosignal software to convert FFTs to Continuous Wavelet transform for analyzing seismic risks.</p>
             </div>
-
             <div class="pub-item">
                 <h3>Time-Frequency Analysis of Strong Ground Motions from the 1994 Northridge Earthquake</h3>
                 <div class="pub-venue">Published Research</div>
-                <p style="color: var(--text-secondary);">Research analyzing earthquake risks to buildings for better structural planning.</p>
             </div>
         </div>
 
         <div style="margin-top: 3rem; padding: 2rem; background: rgba(0, 217, 255, 0.05); border-radius: 20px; border: 1px solid rgba(0, 217, 255, 0.1);">
-            <h3 style="color: var(--accent); margin-bottom: 1rem;">Awards & Recognition</h3>
-            <ul style="color: var(--text-secondary); line-height: 1.8;">
+            <h3 style="color: var(--accent); margin-bottom: 1rem; font-family: 'DM Serif Display', serif; font-size: 1.5rem;">Awards & Recognition</h3>
+            <ul style="color: var(--text-secondary); line-height: 2; padding-left: 1.5rem;">
                 <li>Member of IET (Institution of Engineering and Technology) since April 2023</li>
-                <li>Merit Scholarship recipient all four academic years at Mahindra University (Feb 2024 – Jun 2025)</li>
-                <li>Presented research paper at ICRESH 2024 at Bhabha Atomic Research Centre (BARC), Mumbai (Feb 2024)</li>
+                <li>Merit Scholarship recipient all four academic years at Mahindra University</li>
+                <li>Presented research paper at ICRESH 2024 at Bhabha Atomic Research Centre (BARC), Mumbai</li>
             </ul>
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact -->
     <section id="contact">
         <div class="contact-content">
             <span class="section-tag">Let's Connect</span>
             <h2>Get In Touch</h2>
             <p class="section-description" style="margin: 0 auto 2rem;">
-                I'm actively seeking internship opportunities for 2026. Let's discuss how I can contribute to your team!
+                I'm actively seeking internship and full-time opportunities for 2026. Let's discuss how I can contribute to your team!
             </p>
             <div class="contact-info">
-                <a href="mailto:chaturyaganne05@gmail.com" class="contact-item">
+                <a href="mailto:cganne@umd.edu" class="contact-item">
                     <span class="contact-icon">✉️</span>
-                    <span>chaturyaganne05@gmail.com</span>
+                    <span>cganne@umd.edu</span>
+                </a>
+                <a href="https://github.com/chaturyaganne" target="_blank" class="contact-item">
+                    <span class="contact-icon">💻</span>
+                    <span>GitHub</span>
                 </a>
                 <a href="https://www.linkedin.com/in/chaturya-ganne-6b85a7178/" target="_blank" class="contact-item">
                     <span class="contact-icon">💼</span>
@@ -1137,31 +1074,18 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Chaturya Ganne. All rights reserved. | Designed to impress recruiters ✨</p>
+        <p>&copy; 2026 Chaturya Ganne. All rights reserved.</p>
     </footer>
 
     <script>
-        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
-
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -1170,28 +1094,20 @@
                     observer.unobserve(entry.target);
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-        // Observe all sections
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
+        document.querySelectorAll('section').forEach(section => observer.observe(section));
 
-        // Add active nav link on scroll
         window.addEventListener('scroll', () => {
             const sections = document.querySelectorAll('section[id]');
             const scrollY = window.pageYOffset;
-
             sections.forEach(section => {
                 const sectionHeight = section.offsetHeight;
                 const sectionTop = section.offsetTop - 100;
                 const sectionId = section.getAttribute('id');
                 const navLink = document.querySelector(`.nav-links a[href="#${sectionId}"]`);
-
                 if (navLink && scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                    document.querySelectorAll('.nav-links a').forEach(link => {
-                        link.style.color = 'var(--text-secondary)';
-                    });
+                    document.querySelectorAll('.nav-links a').forEach(link => link.style.color = 'var(--text-secondary)');
                     navLink.style.color = 'var(--accent)';
                 }
             });
