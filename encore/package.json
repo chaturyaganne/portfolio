@@ -1,0 +1,11 @@
+{
+  "name": "encore-ux-portfolio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests.mjs"
+  },
+  "devDependencies": {
+    "jsdom": "26.1.0"
+  }
+}

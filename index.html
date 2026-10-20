@@ -1,695 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chaturya Ganne — ML Engineer</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Darker+Grotesque:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #0A0E27;
-            --secondary: #1A1F3A;
-            --accent: #00D9FF;
-            --accent-warm: #FF6B9D;
-            --text-primary: #E8E8E8;
-            --text-secondary: #A0A0A0;
-            --bg-gradient: linear-gradient(135deg, #0A0E27 0%, #1A1F3A 50%, #0F1729 100%);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Darker Grotesque', sans-serif;
-            background: var(--bg-gradient);
-            color: var(--text-primary);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        .bg-pattern {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1;
-            opacity: 0.03;
-            background-image:
-                radial-gradient(circle at 20% 50%, var(--accent) 1px, transparent 1px),
-                radial-gradient(circle at 80% 80%, var(--accent-warm) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: drift 20s ease-in-out infinite;
-        }
-
-        @keyframes drift {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(50px, 50px); }
-        }
-
-        nav {
-            position: fixed;
-            top: 0; width: 100%;
-            padding: 1.5rem 5%;
-            background: rgba(10, 14, 39, 0.8);
-            backdrop-filter: blur(20px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0, 217, 255, 0.1);
-            animation: slideDown 0.6s ease-out;
-        }
-
-        @keyframes slideDown {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        nav .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.8rem;
-            font-weight: 400;
-            background: linear-gradient(135deg, var(--accent), var(--accent-warm));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px; left: 0;
-            width: 0; height: 2px;
-            background: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover { color: var(--text-primary); }
-        .nav-links a:hover::after { width: 100%; }
-
-        /* Hero */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 8rem 5% 4rem;
-            position: relative;
-        }
-
-        .hero-content { max-width: 1400px; margin: 0 auto; width: 100%; }
-
-        .hero-tag {
-            display: inline-block;
-            padding: 0.5rem 1.5rem;
-            background: rgba(0, 217, 255, 0.1);
-            border: 1px solid var(--accent);
-            border-radius: 50px;
-            color: var(--accent);
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 2rem;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h1 {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(2.5rem, 8vw, 5.5rem);
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            font-weight: 400;
-            animation: fadeInUp 0.8s ease-out 0.4s both;
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, var(--accent), var(--accent-warm));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: var(--text-secondary);
-            max-width: 750px;
-            margin-bottom: 3rem;
-            font-weight: 400;
-            animation: fadeInUp 0.8s ease-out 0.6s both;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease-out 0.8s both;
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: 2px solid;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent), var(--accent-warm));
-            color: var(--primary);
-            border-color: transparent;
-            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 217, 255, 0.4);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            border-color: var(--text-secondary);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            transform: translateY(-3px);
-        }
-
-        /* Sections */
-        section {
-            padding: 6rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-header { margin-bottom: 4rem; }
-
-        .section-tag {
-            color: var(--accent);
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        h2 {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            margin-bottom: 1rem;
-            font-weight: 400;
-        }
-
-        .section-description {
-            color: var(--text-secondary);
-            font-size: 1.2rem;
-            max-width: 700px;
-        }
-
-        /* About */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-text p {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-            color: var(--text-secondary);
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .stat-item {
-            background: rgba(0, 217, 255, 0.05);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(0, 217, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
-        }
-
-        .stat-number {
-            font-family: 'DM Serif Display', serif;
-            font-size: 2.5rem;
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label { color: var(--text-secondary); font-size: 1rem; }
-
-        /* Education */
-        .education-cards { display: grid; gap: 2rem; }
-
-        .edu-card {
-            background: rgba(26, 31, 58, 0.4);
-            border: 1px solid rgba(0, 217, 255, 0.1);
-            border-radius: 20px;
-            padding: 2.5rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-        }
-
-        .edu-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 4px; height: 0;
-            background: linear-gradient(135deg, var(--accent), var(--accent-warm));
-            transition: height 0.4s ease;
-        }
-
-        .edu-card:hover::before { height: 100%; }
-
-        .edu-card:hover {
-            transform: translateX(10px);
-            border-color: var(--accent);
-        }
-
-        .edu-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 1rem;
-        }
-
-        .edu-card h3 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.8rem;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .edu-card .degree {
-            font-size: 1.2rem;
-            color: var(--accent);
-            margin-bottom: 0.3rem;
-        }
-
-        .edu-card .gpa {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--accent-warm);
-        }
-
-        .edu-date { color: var(--text-secondary); font-size: 1rem; white-space: nowrap; }
-
-        .coursework {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(0, 217, 255, 0.1);
-        }
-
-        .coursework-label { font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
-        .coursework-list { color: var(--text-secondary); }
-
-        /* Experience */
-        .experience-timeline {
-            position: relative;
-            padding-left: 3rem;
-        }
-
-        .experience-timeline::before {
-            content: '';
-            position: absolute;
-            left: 0; top: 0;
-            width: 2px; height: 100%;
-            background: linear-gradient(180deg, var(--accent), var(--accent-warm));
-        }
-
-        .exp-item {
-            position: relative;
-            margin-bottom: 3rem;
-            padding: 2rem;
-            background: rgba(26, 31, 58, 0.4);
-            border: 1px solid rgba(0, 217, 255, 0.1);
-            border-radius: 20px;
-            transition: all 0.4s ease;
-        }
-
-        .exp-item::before {
-            content: '';
-            position: absolute;
-            left: -3.5rem; top: 2rem;
-            width: 12px; height: 12px;
-            background: var(--accent);
-            border-radius: 50%;
-            border: 3px solid var(--primary);
-            box-shadow: 0 0 20px var(--accent);
-        }
-
-        .exp-item:hover {
-            transform: translateX(10px);
-            border-color: var(--accent);
-        }
-
-        .exp-header h3 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.6rem;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .company { color: var(--accent); font-size: 1.1rem; margin-bottom: 0.5rem; }
-        .exp-date { color: var(--text-secondary); font-size: 0.95rem; }
-
-        .exp-item ul {
-            margin-top: 1.5rem;
-            padding-left: 1.5rem;
-            color: var(--text-secondary);
-        }
-
-        .exp-item li { margin-bottom: 0.8rem; line-height: 1.6; }
-
-        /* Projects */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: rgba(26, 31, 58, 0.4);
-            border: 1px solid rgba(0, 217, 255, 0.1);
-            border-radius: 20px;
-            padding: 2.5rem;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-card::after {
-            content: '';
-            position: absolute;
-            top: 0; right: 0;
-            width: 100px; height: 100px;
-            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .project-card:hover::after { opacity: 0.1; }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
-            box-shadow: 0 20px 50px rgba(0, 217, 255, 0.2);
-        }
-
-        .project-tag {
-            display: inline-block;
-            padding: 0.3rem 1rem;
-            background: rgba(255, 107, 157, 0.1);
-            border: 1px solid var(--accent-warm);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: var(--accent-warm);
-            margin-bottom: 1rem;
-            align-self: flex-start;
-        }
-
-        .project-card h3 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .project-card p {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-            flex-grow: 1;
-        }
-
-        .tech-stack { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
-
-        .tech-tag {
-            padding: 0.3rem 0.8rem;
-            background: rgba(0, 217, 255, 0.1);
-            border-radius: 15px;
-            font-size: 0.85rem;
-            color: var(--accent);
-        }
-
-        .project-links { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: auto; }
-
-        .project-link {
-            padding: 0.6rem 1.5rem;
-            border: 1px solid var(--accent);
-            border-radius: 25px;
-            color: var(--accent);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .project-link:hover {
-            background: var(--accent);
-            color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        /* Skills */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-category {
-            background: rgba(26, 31, 58, 0.4);
-            border: 1px solid rgba(0, 217, 255, 0.1);
-            border-radius: 20px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .skill-category:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .skill-category h3 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.4rem;
-            margin-bottom: 1.5rem;
-            color: var(--accent);
-        }
-
-        .skill-list { display: flex; flex-wrap: wrap; gap: 0.7rem; }
-
-        .skill-item {
-            padding: 0.5rem 1.2rem;
-            background: rgba(0, 217, 255, 0.05);
-            border: 1px solid rgba(0, 217, 255, 0.2);
-            border-radius: 20px;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-        }
-
-        .skill-item:hover {
-            background: rgba(0, 217, 255, 0.1);
-            color: var(--text-primary);
-            transform: translateY(-2px);
-        }
-
-        /* Publications */
-        .publications-list { display: grid; gap: 2rem; }
-
-        .pub-item {
-            background: rgba(26, 31, 58, 0.4);
-            border: 1px solid rgba(0, 217, 255, 0.1);
-            border-radius: 20px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .pub-item::before {
-            content: '📄';
-            position: absolute;
-            right: 2rem; top: 2rem;
-            font-size: 2rem;
-            opacity: 0.3;
-        }
-
-        .pub-item:hover {
-            border-color: var(--accent);
-            transform: translateX(10px);
-        }
-
-        .pub-item h3 {
-            font-size: 1.3rem;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-            padding-right: 3rem;
-        }
-
-        .pub-venue { color: var(--accent-warm); font-weight: 600; margin-bottom: 0.5rem; }
-        .pub-doi { color: var(--text-secondary); font-size: 0.9rem; }
-        .pub-doi a { color: var(--accent); text-decoration: none; }
-        .pub-doi a:hover { text-decoration: underline; }
-
-        /* Contact */
-        .contact-content { text-align: center; max-width: 800px; margin: 0 auto; }
-        .contact-content h2 { margin-bottom: 2rem; }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-top: 3rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1.5rem 2rem;
-            background: rgba(26, 31, 58, 0.4);
-            border: 1px solid rgba(0, 217, 255, 0.1);
-            border-radius: 15px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: var(--text-primary);
-        }
-
-        .contact-item:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
-        }
-
-        .contact-icon { font-size: 1.5rem; }
-
-        footer {
-            text-align: center;
-            padding: 3rem 5%;
-            border-top: 1px solid rgba(0, 217, 255, 0.1);
-            color: var(--text-secondary);
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
-        }
-
-        .scroll-indicator svg { width: 30px; height: 30px; stroke: var(--accent); }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .about-grid { grid-template-columns: 1fr; }
-            .stats { grid-template-columns: 1fr; }
-            .projects-grid { grid-template-columns: 1fr; }
-            .skills-grid { grid-template-columns: 1fr; }
-            .experience-timeline { padding-left: 2rem; }
-            h1 { font-size: 2.5rem; }
-            h2 { font-size: 2rem; }
-        }
-    </style>
-</head>
-<body>
-    <div class="bg-pattern"></div>
-
-    <nav>
-        <div class="container">
-            <div class="logo">CG</div>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#publications">Publications</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-content">
-            <span class="hero-tag">Available for Internships and Full-time Roles 2027</span>
-            <h1>
-                Hey, I'm <span class="gradient-text">Chaturya Ganne</span>
-            </h1>
-            <p class="hero-subtitle">
-                Building intelligent systems with Deep Learning, Computer Vision, and Generative AI.
-                MS in Applied Machine Learning at University of Maryland · GPA 4.0 · 5 peer-reviewed publications including IWSHM 2025 at Stanford.
-            </p>
-            <div class="cta-buttons">
-                <a href="#projects" class="btn btn-primary">View My Work</a>
-                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                <path d="M12 5v14M5 12l7 7 7-7"/>
-            </svg>
-        </div>
-    </section>
-
-    <!-- About -->
-    <section id="about">
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Chaturya Ganne — AI engineering, UX exploration, and thoughtfully built experiences. Explore Encore, an interactive live-event ticketing case study."><meta name="theme-color" content="#f6f5ed"><title>Chaturya Ganne — Design × Engineering</title><link rel="stylesheet" href="encore/site.css"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%2318352c'/%3E%3Ctext x='32' y='40' text-anchor='middle' fill='%23deff83' font-family='Georgia' font-size='25'%3ECG%3C/text%3E%3C/svg%3E"></head><body><a class="skip" href="#main">Skip to content</a><header class="site-header" id="site-header"><div class="wrap nav-inner"><a class="brand" href="#home"><span class="monogram">CG</span><span>Chaturya Ganne<small>Design & engineering</small></span></a><nav aria-label="Portfolio"><ul class="nav-links"><li><a href="#work">Work</a></li><li><a href="#approach">Approach</a></li><li><a href="#about">About</a></li><li><a href="#contact">Let's talk ↗</a></li></ul></nav><span class="availability"><span class="dot"></span>College Park, MD</span></div></header><main id="main" tabindex="-1"><div id="home-view"><div class="wrap"><section class="hero" aria-labelledby="home-title"><div class="hero-top"><span class="eyebrow">Chaturya Ganne / Design × Engineering</span><span class="availability"><span class="dot"></span>Open to 2027 opportunities</span></div><h1 id="home-title">Less friction.<br><em>More feeling.</em></h1><div class="hero-bottom"><p class="hero-description">I'm Chaturya—an AI engineer exploring how thoughtful design makes complex systems feel simple. Currently studying Applied Machine Learning at the University of Maryland.</p><a class="text-link" href="#work">Explore selected work <span class="arrow" aria-hidden="true">↘</span></a></div></section><section class="work-section" id="work"><div class="section-head"><h2>Selected work<span style="color:#a53f25">.</span></h2><p>A new UX exploration, grounded in a background of building working systems.</p></div><a class="feature" href="#encore" aria-label="Read Encore, a live-event group planning UX case study"><div class="feature-art"><div class="ticket-window" aria-hidden="true"><div class="mini-nav"><span class="encore-wordmark">encore<span style="color:#a53f25">✳</span></span><span>Good nights start here.</span></div><div class="mini-stage"><div class="orb"></div><h4>Midnight<br>Echo</h4><small>MAY 14 · HARBOR HALL · NEW YORK</small></div><div class="mini-ticket"><div>Section 102 · Row B<small>4 seats together</small><span class="mini-chip">Step-free route · Clear view</span></div><div><strong>$80</strong><small>per person, all-in</small></div></div><div class="mini-total"><span>One group. One clear plan.</span><span>Explore seats ↗</span></div></div></div><div class="feature-copy"><span class="tag">Featured UX case study / 01</span><h3>Encore</h3><p class="subtitle">Getting everyone<br>to a good night out.</p><p>A group-first ticketing concept that brings budgets, seat trade-offs and access needs into one clear decision.</p><div class="tags"><span class="tag">UX exploration</span><span class="tag">Interaction design</span><span class="tag">Working prototype</span></div><span class="round-arrow" aria-hidden="true">↗</span></div></a><p class="profile-note">Independent concept inspired by live-event ticketing. Not affiliated with SeatGeek. Research hypotheses are distinguished from tested implementation.</p></section><section class="process-strip" id="approach"><span class="eyebrow">How I approach a problem</span><div class="section-head"><h2>Curiosity, made tangible.</h2><p>Connect the question, the decision, and the thing people can actually use.</p></div><div class="process-grid"><div class="process-item"><span>01 / Understand</span><h3>Start with a task.</h3><p>Make assumptions explicit. Ask what someone needs to accomplish and what makes that difficult.</p></div><div class="process-item"><span>02 / Make</span><h3>Build to think.</h3><p>Move from a rough flow to a working interaction, so the trade-offs can be experienced and questioned.</p></div><div class="process-item"><span>03 / Refine</span><h3>Leave room to learn.</h3><p>Review the details, test the behavior, and identify what still needs evidence from real users.</p></div></div></section><div class="legacy"><section id="about">
         <div class="section-header">
             <span class="section-tag">Get to Know Me</span>
             <h2>About Me</h2>
@@ -728,10 +37,7 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Education -->
-    <section id="education">
+    </section><section id="education">
         <div class="section-header">
             <span class="section-tag">Academic Background</span>
             <h2>Education</h2>
@@ -763,16 +69,13 @@
                     <div class="coursework-label">Coursework:</div>
                     <div class="coursework-list">Data Structures & Algorithms, Deep Learning, Computer Vision</div>
                 </div>
-                <div class="coursework" style="border-top: none; padding-top: 0.5rem;">
-                    <div class="coursework-label" style="color: var(--accent-warm);">Awards:</div>
+                <div class="coursework">
+                    <div class="coursework-label">Awards:</div>
                     <div class="coursework-list">Merit Scholarship all four years · IET Member since Apr 2023 · Presented at ICRESH 2024, BARC Mumbai</div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Experience -->
-    <section id="experience">
+    </section><section id="experience">
         <div class="section-header">
             <span class="section-tag">Professional Journey</span>
             <h2>Experience</h2>
@@ -804,10 +107,7 @@
                 </ul>
             </div>
         </div>
-    </section>
-
-    <!-- Projects -->
-    <section id="projects">
+    </section><details class="archive-toggle" id="engineering-archive"><summary>Engineering & research projects <small>Explore the ML work behind my systems background</small></summary><section id="projects">
         <div class="section-header">
             <span class="section-tag">Featured Work</span>
             <h2>Projects</h2>
@@ -937,10 +237,7 @@
             </div>
 
         </div>
-    </section>
-
-    <!-- Skills -->
-    <section id="skills">
+    </section><section id="skills">
         <div class="section-header">
             <span class="section-tag">Technical Expertise</span>
             <h2>Skills</h2>
@@ -1014,10 +311,7 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Publications -->
-    <section id="publications">
+    </section></details><section id="publications">
         <div class="section-header">
             <span class="section-tag">Research Contributions</span>
             <h2>Publications & Achievements</h2>
@@ -1047,22 +341,19 @@
             </div>
         </div>
 
-        <div style="margin-top: 3rem; padding: 2rem; background: rgba(0, 217, 255, 0.05); border-radius: 20px; border: 1px solid rgba(0, 217, 255, 0.1);">
-            <h3 style="color: var(--accent); margin-bottom: 1rem; font-family: 'DM Serif Display', serif; font-size: 1.5rem;">Awards & Recognition</h3>
-            <ul style="color: var(--text-secondary); line-height: 2; padding-left: 1.5rem;">
+        <div>
+            <h3>Awards & Recognition</h3>
+            <ul>
                 <li>Member of IET (Institution of Engineering and Technology) since April 2023</li>
                 <li>Merit Scholarship recipient all four academic years at Mahindra University</li>
                 <li>Presented research paper at ICRESH 2024 at Bhabha Atomic Research Centre (BARC), Mumbai</li>
             </ul>
         </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact">
+    </section><section id="contact">
         <div class="contact-content">
             <span class="section-tag">Let's Connect</span>
             <h2>Get In Touch</h2>
-            <p class="section-description" style="margin: 0 auto 2rem;">
+            <p class="section-description">
                 I'm actively seeking full-time opportunities for 2027. Let's discuss how I can contribute to your team!
             </p>
             <div class="contact-info">
@@ -1084,46 +375,26 @@
                 </a>
             </div>
         </div>
-    </section>
-
-    <footer>
-        <p>&copy; Chaturya Ganne. All rights reserved.</p>
-    </footer>
-
-    <script>
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        });
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-        document.querySelectorAll('section').forEach(section => observer.observe(section));
-
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section[id]');
-            const scrollY = window.pageYOffset;
-            sections.forEach(section => {
-                const sectionHeight = section.offsetHeight;
-                const sectionTop = section.offsetTop - 100;
-                const sectionId = section.getAttribute('id');
-                const navLink = document.querySelector(`.nav-links a[href="#${sectionId}"]`);
-                if (navLink && scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                    document.querySelectorAll('.nav-links a').forEach(link => link.style.color = 'var(--text-secondary)');
-                    navLink.style.color = 'var(--accent)';
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+    </section></div></div></div><div id="case-view" class="wrap" hidden><section class="case-hero" aria-labelledby="case-title">
+  <a class="back-link" href="#work">← Back to selected work</a>
+  <span class="eyebrow case-kicker">Independent UX concept · Live entertainment · 2026</span>
+  <h1 id="case-title">Encore.</h1>
+  <p class="lead">One night out.<br>Everyone on the same page.</p>
+  <p>Exploring a calmer way for friends to choose tickets together—with a shared budget, clear seat trade-offs, and no price arithmetic.</p>
+  <div class="button-row" style="margin-top:28px"><a href="#encore-prototype" class="btn">Try the interactive prototype <span aria-hidden="true">↗</span></a><a href="encore/research-kit.md" class="btn light" download>Read the research plan ↓</a></div>
+  <dl class="case-meta"><div><dt>My role</dt><dd>UX exploration, interaction design<br>and front-end implementation</dd></div><div><dt>Scope</dt><dd>Discovery → comparison<br>→ order review</dd></div><div><dt>Built with</dt><dd>HTML, CSS, JavaScript<br>AI-assisted iteration</dd></div><div><dt>Project status</dt><dd>Working concept<br>User research planned</dd></div></dl>
+</section>
+<div class="case-banner"><div class="banner-statement">The best seat?<br>The one that<br>works for all of us.<small>Group needs stay visible throughout the journey, instead of disappearing between screens.</small></div><div class="ticket-window" aria-hidden="true"><div class="mini-nav"><span class="encore-wordmark">encore<span style="color:#a53f25">✳</span></span><span>Good nights start here.</span></div><div class="mini-stage"><div class="orb"></div><h4>Midnight<br>Echo</h4><small>MAY 14 · HARBOR HALL · NEW YORK</small></div><div class="mini-ticket"><div>Section 102 · Row B<small>4 seats together</small><span class="mini-chip">Step-free route · Clear view</span></div><div><strong>$80</strong><small>per person, all-in</small></div></div><div class="mini-total"><span>One group. One clear plan.</span><span>Explore seats ↗</span></div></div></div>
+<div class="case-layout">
+ <nav class="case-toc" aria-label="Case study sections"><a href="#encore/problem">01 / The opportunity</a><a href="#encore/process">02 / Understanding the task</a><a href="#encore/decisions">03 / Design decisions</a><a href="#encore/iteration">04 / Iteration</a><a href="#encore/validation">05 / Validation</a><a href="#encore/handoff">06 / Handoff & reflection</a></nav>
+ <article>
+  <section class="case-section" id="case-problem"><span class="eyebrow">01 / The opportunity</span><h2>Buying tickets is one decision.<br>Planning together is several.</h2><p>For a group outing, the organizer is making a decision on behalf of people with different budgets, preferences, and access needs. A promising design opportunity is to put those constraints next to the tickets, so the organizer can reason about the whole night rather than just the lowest price.</p><blockquote class="pull-quote">How might we help a group choose tickets with confidence, without making one person hold every constraint in their head?</blockquote><div class="note"><strong>Evidence boundary.</strong> This is a self-initiated concept inspired by the supplied SeatGeek UX New Grad brief. It is not commissioned by, affiliated with, or a redesign shipped at SeatGeek. No participants were interviewed. Personas, pain points, and expected benefits below are hypotheses to test.</div><h3>Start from what already exists</h3><p><a href="https://seatgeek.com/blog/seatgeek-all-in-pricing-explained-how-to-avoid-hidden-ticket-fees" target="_blank" rel="noopener noreferrer">SeatGeek already displays all-in prices</a>, and its <a href="https://support.seatgeek.com/hc/en-us/articles/11181317039891-What-should-I-expect-when-buying-tickets-for-prominent-events" target="_blank" rel="noopener noreferrer">help documentation describes an Accessible filter</a>. Those are useful foundations, not missing features I can claim to have discovered. Encore combines these concepts with persistent group constraints and side-by-side trade-offs in a fictional ticketing flow.</p></section>
+  <section class="case-section" id="case-process"><span class="eyebrow">02 / Understanding the task</span><h2>Design around the organizer.<br>Keep every fan in the picture.</h2><p><strong>Working proto-persona:</strong> an organizer choosing four seats for friends. This role is a design aid, not a research finding. The prototype task is to choose four adjacent seats at no more than $100 per person, with a step-free route and a clear view.</p><div class="hypothesis-grid"><div class="hypothesis"><span>Hypothesis 01</span><h3>“What will we each pay?”</h3><p>Showing per-person and group totals together may reduce calculation and uncertainty.</p></div><div class="hypothesis"><span>Hypothesis 02</span><h3>“Does this work for everyone?”</h3><p>Keeping seating needs visible may prevent selections that miss a group requirement.</p></div><div class="hypothesis"><span>Hypothesis 03</span><h3>“Which trade-off is worth it?”</h3><p>A comparison of price, view, and route information may make compromises easier to discuss.</p></div></div><h3>A small journey with explicit decision points</h3><div class="journey"><div><b>1. Set group needs</b><small>Party size, all-in budget, step-free route, clear view.</small></div><div><b>2. Explore options</b><small>Browse fictional events. Retain constraints when opening seats.</small></div><div><b>3. Compare seats</b><small>See price, route and view facts side by side.</small></div><div><b>4. Review the plan</b><small>Check the exact group total and copy a plan to share.</small></div></div><p>The prototype has seeded inventory rather than a live marketplace. Adjacent-seat availability is an explicit property of each sample listing. Access information is illustrative; a real product would need authoritative venue data, refresh rules, and a clear way to resolve uncertainty.</p></section>
+  <section class="case-section" id="case-decisions"><span class="eyebrow">03 / Design decisions</span><h2>Three decisions that shape<br>the experience.</h2><div class="decision"><span class="num">01</span><div><h3>Make the budget a group rule, not a mental note.</h3><p>The budget is all-in and per person. The party size and total stay visible when browsing seats. Changing either recalculates results and the review. This is an exact arithmetic behavior, not a promise about a real ticket marketplace.</p></div></div><div class="decision"><span class="num">02</span><div><h3>Explain fit instead of inventing a “best deal” score.</h3><p>Every listing describes the view and access route in text. A map provides orientation, but the same section can be selected from a labeled list. I chose observable attributes over an opaque score that this dataset cannot justify.</p></div></div><div class="decision"><span class="num">03</span><div><h3>Let people compare, then carry the decision forward.</h3><p>Compare up to three listings on the same criteria. Selecting one opens a review with base price, fees, per-person total and group total. Copying the plan does not send a message or create a live shared session. The recipient gets plain text they can discuss with the organizer.</p></div></div><div class="principle-banner"><strong>No countdown. No fake scarcity. No payment collection.</strong><span>The final action ends a prototype task, not a purchase.</span></div></section>
+  <section class="case-section" id="case-iteration"><span class="eyebrow">04 / Iteration through self-review</span><h2>From a cheaper-looking ticket<br>to a clearer decision.</h2><p>I reviewed an early wireframe against the task: could someone correctly state what each person would pay, identify access information, and compare seats? This was a design critique, not a moderated usability study or feedback from a fictional team.</p><div class="before-after"><div class="wireframe"><h4>Explored / V1 wireframe</h4><div class="wire-box short"></div><div class="wire-box"></div><div class="wire-card">Section 102 · Row B<br><strong>$64 + fees</strong><br>More details →</div><div class="wire-card">Section 104 · Row D<br><strong>$78 + fees</strong><br>More details →</div><p style="margin-top:18px">Separate fee context and hidden route details make the group task harder to reason about. This is an intentionally limited early sketch, not a claim about SeatGeek's interface.</p></div><div class="refined"><h4>Implemented / V2 prototype</h4><div class="refined-ticket"><span>Section 102 · Row B</span><br><strong>$80</strong> <small>per person, all-in</small><div class="badges"><span class="badge">Step-free route</span><span class="badge">Clear view</span></div><span>4 seats together · $320 group total</span></div><p style="margin-top:18px">Price, fit, and group total move into the decision surface. An explicit compare action carries the same attributes into a table.</p></div></div><h3>Review log</h3><div class="table-scroll"><table class="case-table"><thead><tr><th>Self-review observation</th><th>Change made</th><th>What remains untested</th></tr></thead><tbody><tr><td>A map-only selection would exclude some interactions.</td><td>Added labeled ticket buttons, keyboard-selectable map sections and visible focus states.</td><td>Screen-reader and assistive-technology sessions.</td></tr><tr><td>Resetting everything after zero results loses useful context.</td><td>Added separate actions to widen the budget or clear only access/view requirements.</td><td>Whether people understand the source of an empty state.</td></tr><tr><td>Filters can hide compared tickets and confuse review.</td><td>Changing group needs clears the comparison and selected seat; explains the change in a status message.</td><td>Whether that reset feels predictable to real users.</td></tr><tr><td>A copied plan could be mistaken for a reservation.</td><td>Plan text explicitly says sample inventory, no reservation or purchase.</td><td>How recipients interpret the plan outside the prototype.</td></tr></tbody></table></div></section>
+  <section class="case-section" id="case-validation"><span class="eyebrow">05 / Validation</span><h2>Working interactions.<br>Research still to do.</h2><p>The implementation includes automated behavior checks for the core journey, pricing, filtering, comparison, and recovery states. Those checks establish software behavior. They do not measure whether fans find the design intuitive, accessible, or useful.</p><div class="note"><strong>Research status:</strong> no participant study has been run. There is no claimed conversion lift, task-success rate, satisfaction score, or usability improvement. A prototype session can record its own elapsed time and actions locally; that is an individual session record, not a study result.</div><h3>A test plan ready to run</h3><ol class="research-list"><li>Recruit five adult participants with varied event-buying experience; include participants with access needs through consent-based recruiting. Five is a proposed first round, not a sample already tested.</li><li>Ask each participant to choose four adjacent seats under $100 per person, with a step-free route and a clear view. Observe behavior before offering guidance.</li><li>Ask them to compare two options, explain the total, and recover from an impossible budget. Probe which information they trust and what remains unclear.</li><li>Record task completion, critical errors, price comprehension, first-click choices and a post-task ease rating. Treat results as directional qualitative evidence; do not generalize a tiny convenience sample.</li><li>Review findings with a designer, PM and engineer if collaborators are available. Prioritize observed issues, revise, and repeat. Those collaborative sessions have not happened yet.</li></ol><div class="button-row"><a class="btn light" href="#encore-prototype" data-start-task="true">Try the research task ↗</a><a class="download-link" href="encore/research-kit.md" download>Download moderator guide ↓</a></div><h3>Accessibility choices and limits</h3><p>Visible labels, text-based seat attributes, keyboard controls, a comparison dialog with focus handling, reduced-motion styles and responsive layouts are implemented. These decisions follow <a href="https://www.w3.org/WAI/tutorials/forms/labels/" target="_blank" rel="noopener noreferrer">WAI labeling guidance</a> and <a href="https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html" target="_blank" rel="noopener noreferrer">visible-focus guidance</a>. They are not a WCAG certification or a substitute for manual audits and assistive-technology testing.</p></section>
+  <section class="case-section" id="case-handoff"><span class="eyebrow">06 / Handoff & reflection</span><h2>A small system.<br>A deliberate point of view.</h2><p>The visual system balances an editorial event-poster feel with quiet utility: warm paper, dark green, a lime accent, generous typography and simple bordered controls. Color never carries the only meaning of a ticket attribute.</p><div class="swatches"><div class="swatch"><i style="background:#f6f5ed"></i>Paper · #F6F5ED</div><div class="swatch"><i style="background:#18352c"></i>Ink · #18352C</div><div class="swatch"><i style="background:#deff83"></i>Signal · #DEFF83</div><div class="swatch"><i style="background:#a53f25"></i>Accent · #A53F25</div></div><div class="type-sample"><strong>Good nights start here.</strong><small>DM Serif Display for display / DM Sans for interface text</small></div><p>Engineering handoff includes data fields, price calculations, filter behavior, component states, responsive rules, and implementation constraints. An editable SVG sheet can be imported into Figma for further work. It is not a native Figma file, and this project does not claim Figma proficiency that has not been demonstrated.</p><div class="case-assets"><a class="download-link" href="encore/design-handoff.svg" download>Editable design sheet ↓</a><a class="download-link" href="encore/design-spec.md" download>Design & engineering specification ↓</a><a class="download-link" href="encore/research-kit.md" download>Research kit ↓</a><a class="download-link" href="https://github.com/chaturyaganne/portfolio/tree/main/encore" target="_blank" rel="noopener noreferrer">Project source ↗</a></div><h3>What I would do next</h3><p>Validate whether group constraints deserve this much prominence. Test how people distinguish a step-free route from accessible seating, and how they handle incomplete venue information. If those assumptions do not hold, simplify the flow rather than adding features. A real launch would also require venue-supplied inventory, permission-aware shared planning, pricing/tax rules, payment processing, security review and product analytics.</p><p>This self-directed project was created with Codex assistance for design exploration and implementation. The resulting decisions, limits and artifacts are available to inspect; no customer research or team feedback has been invented.</p></section>
+  <section class="case-end"><h2>Less tab-switching.<br>More looking forward to it.</h2><p>Explore the prototype, change the group needs, compare seats, and see whether the decision feels clear to you.</p><a class="btn lime" href="#encore-prototype">Open Encore prototype ↗</a></section>
+ </article>
+</div>
+</div><div id="prototype-view" class="app-shell" hidden><header class="app-header"><div class="wrap app-nav"><a href="#encore" class="encore-wordmark" aria-label="Encore case study">encore<span style="color:#a53f25">✳</span></a><small>Good nights start here.</small><a class="text-link" href="#encore">Back to case study ↗</a></div></header><div class="demo-ribbon">Independent interactive concept · Fictional events and seats · No purchases or reservations</div><div class="wrap app-main" id="app"></div><div id="compare-dock" class="compare-dock" hidden></div><div id="status" class="screen-reader-only" role="status" aria-live="polite"></div><div class="toast" id="toast" role="status" hidden></div><dialog id="app-dialog" class="dialog" aria-labelledby="dialog-title"></dialog></div></main><footer id="site-footer" class="wrap site-footer"><span>© Chaturya Ganne · Thoughtfully explored. Carefully built.</span><a href="mailto:cganne@umd.edu">cganne@umd.edu ↗</a></footer><noscript><p class="static-notice">The portfolio and case study are readable without JavaScript. The interactive prototype requires JavaScript.</p><style>#case-view[hidden]{display:block!important}</style></noscript><script src="encore/app.js" defer></script></body></html>
