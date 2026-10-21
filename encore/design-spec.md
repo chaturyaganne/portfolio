@@ -35,7 +35,7 @@ Matching requires: enough adjacent seats, each <= budget in cents, and any reque
 
 ## Visual system
 
-Paper #F6F5ED, ink #18352C, muted text #52665C, line #CED4C7, lime #DEFF83, accent #A53F25, white #FFFEF9. DM Serif Display for display headings, DM Sans for controls/body, local Georgia/Arial fallbacks. Avoid color-only state meaning. Buttons have minimum-height targets, explicit labels and visible keyboard outlines.
+Paper #F7F7F2, ink #17263F, muted text #566174, line #D9DDE3, signal #DCE8FF, accent #B83C2A, white #FFFFFF. DM Serif Display for display headings, DM Sans for controls/body, local Georgia/Arial fallbacks. Avoid color-only state meaning. Buttons have minimum-height targets, explicit labels and visible keyboard outlines.
 
 Breakpoints: 1000 px, 700 px and 380 px. Desktop uses 3 event columns and a map/list split; smaller screens use 2 and then 1 column. Case-study navigation becomes a wrapping row. Table wrappers allow horizontal scrolling rather than clipping. Reduced-motion media query removes transitions and smooth scrolling. Print styles remove navigation and emphasize case-study content.
 
@@ -50,3 +50,7 @@ All events and seats are seeded examples. Proto-personas, pain points and expect
 This is a static GitHub Pages project, using relative asset paths under `encore/` and hash navigation so direct case-study/prototype URLs work without server rewrites. A production marketplace would require authoritative inventory, accommodation metadata, authentication, permission-aware collaboration, payments, taxes, privacy review, error handling and monitored analytics.
 
 Manual visual, keyboard, screen-reader, browser-compatibility and device tests are distinct from DOM checks. See validation evidence for what was actually executed; do not describe the site as WCAG-certified or user-validated.
+
+## Standalone delivery and modules
+
+The original portfolio homepage is restored unchanged. This project has its own `/portfolio/encore/` directory, with `index.html` for the project overview, `case-study.html` for the narrative and `prototype.html` for the interactive flow. Shared templates generate all three entry pages. `catalog.js` owns fictional sample content; `domain.js` owns integer-cent arithmetic and eligibility predicates; `app.js` owns interaction state and rendering. `site.css` supplies shared components and `modular.css` supplies the standalone project layout and visual overrides.

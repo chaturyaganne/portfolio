@@ -1,12 +1,13 @@
 # Encore — a live-event group planning UX project
 
-Featured case study and working static prototype in Chaturya Ganne's portfolio. Built for a UX New Grad application: user/task hypotheses, information architecture, self-review iterations, interaction design, accessibility choices, engineering handoff and a research plan.
+A standalone UX project site with an overview, a case-study entry page and a working prototype. Built for a UX New Grad application: user/task hypotheses, information architecture, self-review iterations, interaction design, accessibility choices, engineering handoff and a research plan.
 
 ## Open
 
-- Portfolio: `https://chaturyaganne.github.io/portfolio/`
-- Case study: `https://chaturyaganne.github.io/portfolio/#encore`
-- Prototype: `https://chaturyaganne.github.io/portfolio/#encore-prototype`
+- Project overview: `https://chaturyaganne.github.io/portfolio/encore/`
+- Original portfolio (restored): `https://chaturyaganne.github.io/portfolio/`
+- Case study: `https://chaturyaganne.github.io/portfolio/encore/case-study.html`
+- Prototype: `https://chaturyaganne.github.io/portfolio/encore/prototype.html`
 
 These are intended publication paths. Consult the delivery note for whether publication was verified.
 
@@ -18,13 +19,13 @@ The case-study research task starts a local session record. It is not a complete
 
 ## Files
 
-`app.js`: data, filtering, pricing, routing, dialogs, comparison, review and local task instrumentation. `site.css`: responsive visual system. `design-spec.md`: component/data/state handoff. `research-kit.md`: consent/recruiting guidance, neutral tasks, observation sheet and analysis plan. `design-handoff.svg`: editable vector sheet, importable into Figma. `tests.mjs`: automated DOM behavior checks. No native Figma file or completed Figma work is claimed.
+`catalog.js`: fictional events and inventory. `domain.js`: pure pricing and eligibility rules. `app.js`: interaction state, routing, dialogs, comparison, review and local task instrumentation. `modular.css`: standalone project layout and component styling. `site.css`: responsive visual system. `design-spec.md`: component/data/state handoff. `research-kit.md`: consent/recruiting guidance, neutral tasks, observation sheet and analysis plan. `design-handoff.svg`: editable vector sheet, importable into Figma. `tests.mjs`: automated DOM behavior checks. No native Figma file or completed Figma work is claimed.
 
-The portfolio retains the original engineering projects, research, education, experience and external links. Its new design introduces UX exploration without inventing UX employment or changing the degree timeline.
+The main portfolio homepage is restored byte-for-byte from its pre-Encore revision. This project lives only at the separate /portfolio/encore/ URL, with its own identity and navigation.
 
 ## Development
 
-The live application is plain HTML/CSS/JavaScript and has no runtime packages. To run the behavior tests from this directory, install the declared dev dependency with `npm install`, then `npm test`. The authoring checkout additionally contains `build.mjs`, `case-study.html` and the preserved original portfolio source. `node build.mjs` generates `dist/`; publishing copies the generated index and `encore/` assets into the existing Pages repository.
+The live application is plain HTML/CSS/JavaScript and has no runtime packages. To run the behavior tests from this directory, install the declared dev dependency with `npm install`, then `npm test`. The authoring checkout additionally contains `build.mjs`, `case-study.html` and the preserved original portfolio source. `node build-modular.mjs` generates `dist/`; the output contains the unchanged original portfolio index and the separate project under `encore/`. Publishing updates the project directory while preserving the restored root homepage.
 
 ## Evidence boundaries
 

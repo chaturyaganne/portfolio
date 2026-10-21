@@ -4,10 +4,10 @@ import { readFile, access } from 'node:fs/promises';
 let JSDOM;
 try { ({JSDOM}=await import('jsdom')); }
 catch { ({JSDOM}=await import(new URL('../frontend/node_modules/jsdom/lib/api.js',import.meta.url))); }
-let indexURL=new URL('./dist/index.html',import.meta.url);
-try { await access(indexURL); } catch { indexURL=new URL('../index.html',import.meta.url); }
+let indexURL=new URL('./dist/encore/index.html',import.meta.url);
+try { await access(indexURL); } catch { indexURL=new URL('./index.html',import.meta.url); }
 const html=await readFile(indexURL,'utf8');
-const script=await readFile(new URL('./app.js',import.meta.url),'utf8');
+const script=(await Promise.all(['catalog.js','domain.js','app.js'].map(name=>readFile(new URL('./'+name,import.meta.url),'utf8')))).join('\n');
 
 function fixture(t, hash='#encore-prototype', clipboard=true){
  const dom=new JSDOM(html,{url:'https://chaturyaganne.github.io/portfolio/'+hash,runScripts:'outside-only',pretendToBeVisual:true});
@@ -49,7 +49,12 @@ test('clipboard unavailable exposes selectable plan rather than fake success',as
 test('guided task records real local interaction flags without inventing a study',async t=>{const f=fixture(t);f.api.startTask();groupFit(f);openEvent(f);compare(f);f.click('[data-select="a"]');f.click('[data-action="copy-plan"]');await new Promise(resolve=>setTimeout(resolve,0));f.click('[data-action="finish"]');const result=f.api.lastSession;assert.equal(result.selection_meets_task,true);assert.equal(result.compared,true);assert.equal(result.copied_plan,true);assert.equal(result.quantity,4);assert.equal(result.group_total_cents,32000);assert.ok(result.actions>0);assert.ok(result.elapsed_seconds>=0);assert.match(f.$('.session-disclaimer').textContent,/not validated usability outcomes/);});
 test('finishing a free exploration never claims a completed purchase',t=>{const f=fixture(t);openEvent(f);f.click('[data-select="a"]');f.click('[data-action="finish"]');assert.match(f.$('#app-dialog').textContent,/No tickets were purchased or reserved/);assert.equal(f.api.lastSession.task,'free-exploration');assert.equal(f.api.lastSession.selection_meets_task,null);});
 test('accessible controls have labels and duplicate IDs are absent',t=>{const f=fixture(t);openEvent(f);for(const input of f.all('input[id],select[id]'))assert.ok(f.$(`label[for="${input.id}"]`),'Missing label for '+input.id);const ids=f.all('[id]').map(el=>el.id);assert.equal(new Set(ids).size,ids.length);for(const button of f.all('button'))assert.ok(button.textContent.trim()||button.getAttribute('aria-label'));});
-test('case study separates actual implementation from planned research',t=>{const f=fixture(t,'#encore');assert.match(f.$('#case-process').textContent,/not a research finding/);assert.match(f.$('#case-validation').textContent,/no participant study has been run/);assert.match(f.$('#case-handoff').textContent,/not a native Figma file/);assert.ok(f.$('a[href="encore/research-kit.md"]'));});
-test('project assets exist and runtime makes no external service calls',async()=>{for(const name of ['site.css','app.js','design-handoff.svg','research-kit.md','design-spec.md'])await access(new URL('./'+name,import.meta.url));assert.doesNotMatch(script,/\bfetch\s*\(|XMLHttpRequest|sendBeacon|WebSocket/);});
+test('case study separates actual implementation from planned research',t=>{const f=fixture(t,'#encore');assert.match(f.$('#case-process').textContent,/not a research finding/);assert.match(f.$('#case-validation').textContent,/no participant study has been run/);assert.match(f.$('#case-handoff').textContent,/not a native Figma file/);assert.ok(f.$('a[href="research-kit.md"]'));});
+test('project assets exist and runtime makes no external service calls',async()=>{for(const name of ['site.css','modular.css','catalog.js','domain.js','app.js','design-handoff.svg','research-kit.md','design-spec.md'])await access(new URL('./'+name,import.meta.url));assert.doesNotMatch(script,/\bfetch\s*\(|XMLHttpRequest|sendBeacon|WebSocket/);});
 
 test('restarting guided task clears invalid budget state',t=>{const f=fixture(t);openEvent(f);f.change('#budget',999);f.api.startTask();assert.equal(f.api.state.inputError,null);assert.equal(f.$('#budget').value,'150');openEvent(f);assert.equal(f.$('[data-select="a"]').disabled,false);});
+
+test('standalone overview has focused project modules and separate page links',t=>{const f=fixture(t,'#home');assert.equal(f.all('.journey-module').length,3);assert.equal(f.all('.board-card').length,4);assert.ok(f.$('a[href="prototype.html"]'));assert.ok(f.$('a[href="case-study.html"]'));assert.ok(f.$('a[href="../"]'));assert.equal(f.$('#engineering-archive'),null);});
+test('all published entry pages boot their intended default view',async t=>{for(const [name,view] of [['index.html','#home'],['case-study.html','#encore'],['prototype.html','#encore-prototype']]){const entry=new URL(name,indexURL);const text=await readFile(entry,'utf8');const dom=new JSDOM(text,{url:'https://chaturyaganne.github.io/portfolio/encore/'+name,runScripts:'outside-only'});t.after(()=>dom.window.close());dom.window.scrollTo=()=>{};dom.window.eval(script);assert.equal(dom.window.document.body.dataset.defaultView,view);assert.equal(dom.window.document.querySelector(view==='#home'?'#home-view':view==='#encore'?'#case-view':'#prototype-view').hidden,false);if(view==='#encore-prototype')assert.equal(dom.window.document.querySelectorAll('.event-card').length,6);}});
+
+test('skip link preserves the prototype page view',t=>{const f=fixture(t);f.w.document.body.dataset.defaultView='#encore-prototype';f.w.location.hash='main';f.api.route();assert.equal(f.$('#prototype-view').hidden,false);assert.equal(f.$('#home-view').hidden,true);});
