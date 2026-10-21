@@ -6,11 +6,11 @@ Separate Encore project: https://chaturyaganne.github.io/portfolio/encore/
 
 ## Featured link
 
-Suggested title: **Chaturya Ganne | ML & AI Projects + Research**
+Suggested title: **Chaturya Ganne | AI, Software & Data**
 
 Suggested description:
 
-Explore my work in computer vision, retrieval, agentic AI, and applied optimization, along with research publications and engineering experience.
+Explore my work in AI applications, backend services, data workflows, and applied research, including production-grade generative AI and retrieval systems.
 
 LinkedIn supports external links in the Featured section. On your profile, use **Add profile section → Recommended → Add Featured** if it is not present, then the **+** menu to add a link. Paste the portfolio URL, review its title, description and image, and save. Available labels may vary by interface. LinkedIn's Featured visibility follows your profile settings, and its Help page says viewers must be signed in to LinkedIn. The portfolio itself is public and does not require a LinkedIn login.
 
@@ -25,7 +25,7 @@ I've refreshed my portfolio to make the work behind my ML and AI projects easier
 
 It brings together computer vision, adaptive model routing, optimization, and a separate UX concept called Encore. You can explore the demos, code, and research behind the work.
 
-I'm pursuing my M.S. in Applied Machine Learning at the University of Maryland and exploring internship and full-time opportunities for 2027.
+I'm pursuing my M.S. in Applied Machine Learning at the University of Maryland and exploring 2027 internship and full-time opportunities in AI engineering, software engineering, and data.
 
 If you work on ML systems, retrieval, or useful AI products, I'd value your feedback: which project would you like to see a deeper technical walkthrough of?
 
