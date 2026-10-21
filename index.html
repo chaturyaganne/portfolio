@@ -1,816 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chaturya Ganne — ML Engineer</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Darker+Grotesque:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #0A0E27;
-            --secondary: #1A1F3A;
-            --accent: #00D9FF;
-            --accent-warm: #FF6B9D;
-            --text-primary: #E8E8E8;
-            --text-secondary: #A0A0A0;
-            --bg-gradient: linear-gradient(135deg, #0A0E27 0%, #1A1F3A 50%, #0F1729 100%);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Darker Grotesque', sans-serif;
-            background: var(--bg-gradient);
-            color: var(--text-primary);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        .bg-pattern {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1;
-            opacity: 0.03;
-            background-image:
-                radial-gradient(circle at 20% 50%, var(--accent) 1px, transparent 1px),
-                radial-gradient(circle at 80% 80%, var(--accent-warm) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: drift 20s ease-in-out infinite;
-        }
-
-        @keyframes drift {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(50px, 50px); }
-        }
-
-        nav {
-            position: fixed;
-            top: 0; width: 100%;
-            padding: 1.5rem 5%;
-            background: rgba(10, 14, 39, 0.8);
-            backdrop-filter: blur(20px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0, 217, 255, 0.1);
-            animation: slideDown 0.6s ease-out;
-        }
-
-        @keyframes slideDown {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        nav .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.8rem;
-            font-weight: 400;
-            background: linear-gradient(135deg, var(--accent), var(--accent-warm));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px; left: 0;
-            width: 0; height: 2px;
-            background: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover { color: var(--text-primary); }
-        .nav-links a:hover::after { width: 100%; }
-
-        /* Hero */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 8rem 5% 4rem;
-            position: relative;
-        }
-
-        .hero-content { max-width: 1400px; margin: 0 auto; width: 100%; }
-
-        .hero-tag {
-            display: inline-block;
-            padding: 0.5rem 1.5rem;
-            background: rgba(0, 217, 255, 0.1);
-            border: 1px solid var(--accent);
-            border-radius: 50px;
-            color: var(--accent);
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 2rem;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h1 {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(2.5rem, 8vw, 5.5rem);
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            font-weight: 400;
-            animation: fadeInUp 0.8s ease-out 0.4s both;
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, var(--accent), var(--accent-warm));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: var(--text-secondary);
-            max-width: 750px;
-            margin-bottom: 3rem;
-            font-weight: 400;
-            animation: fadeInUp 0.8s ease-out 0.6s both;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease-out 0.8s both;
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: 2px solid;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent), var(--accent-warm));
-            color: var(--primary);
-            border-color: transparent;
-            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 217, 255, 0.4);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            border-color: var(--text-secondary);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            transform: translateY(-3px);
-        }
-
-        /* Sections */
-        section {
-            padding: 6rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-header { margin-bottom: 4rem; }
-
-        .section-tag {
-            color: var(--accent);
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        h2 {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            margin-bottom: 1rem;
-            font-weight: 400;
-        }
-
-        .section-description {
-            color: var(--text-secondary);
-            font-size: 1.2rem;
-            max-width: 700px;
-        }
-
-        /* About */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-text p {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-            color: var(--text-secondary);
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .stat-item {
-            background: rgba(0, 217, 255, 0.05);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(0, 217, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
-        }
-
-        .stat-number {
-            font-family: 'DM Serif Display', serif;
-            font-size: 2.5rem;
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label { color: var(--text-secondary); font-size: 1rem; }
-
-        /* Education */
-        .education-cards { display: grid; gap: 2rem; }
-
-        .edu-card {
-            background: rgba(26, 31, 58, 0.4);
-            border: 1px solid rgba(0, 217, 255, 0.1);
-            border-radius: 20px;
-            padding: 2.5rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-        }
-
-        .edu-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 4px; height: 0;
-            background: linear-gradient(135deg, var(--accent), var(--accent-warm));
-            transition: height 0.4s ease;
-        }
-
-        .edu-card:hover::before { height: 100%; }
-
-        .edu-card:hover {
-            transform: translateX(10px);
-            border-color: var(--accent);
-        }
-
-        .edu-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 1rem;
-        }
-
-        .edu-card h3 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.8rem;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .edu-card .degree {
-            font-size: 1.2rem;
-            color: var(--accent);
-            margin-bottom: 0.3rem;
-        }
-
-        .edu-card .gpa {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--accent-warm);
-        }
-
-        .edu-date { color: var(--text-secondary); font-size: 1rem; white-space: nowrap; }
-
-        .coursework {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(0, 217, 255, 0.1);
-        }
-
-        .coursework-label { font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
-        .coursework-list { color: var(--text-secondary); }
-
-        /* Experience */
-        .experience-timeline {
-            position: relative;
-            padding-left: 3rem;
-        }
-
-        .experience-timeline::before {
-            content: '';
-            position: absolute;
-            left: 0; top: 0;
-            width: 2px; height: 100%;
-            background: linear-gradient(180deg, var(--accent), var(--accent-warm));
-        }
-
-        .exp-item {
-            position: relative;
-            margin-bottom: 3rem;
-            padding: 2rem;
-            background: rgba(26, 31, 58, 0.4);
-            border: 1px solid rgba(0, 217, 255, 0.1);
-            border-radius: 20px;
-            transition: all 0.4s ease;
-        }
-
-        .exp-item::before {
-            content: '';
-            position: absolute;
-            left: -3.5rem; top: 2rem;
-            width: 12px; height: 12px;
-            background: var(--accent);
-            border-radius: 50%;
-            border: 3px solid var(--primary);
-            box-shadow: 0 0 20px var(--accent);
-        }
-
-        .exp-item:hover {
-            transform: translateX(10px);
-            border-color: var(--accent);
-        }
-
-        .exp-header h3 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.6rem;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .company { color: var(--accent); font-size: 1.1rem; margin-bottom: 0.5rem; }
-        .exp-date { color: var(--text-secondary); font-size: 0.95rem; }
-
-        .exp-item ul {
-            margin-top: 1.5rem;
-            padding-left: 1.5rem;
-            color: var(--text-secondary);
-        }
-
-        .exp-item li { margin-bottom: 0.8rem; line-height: 1.6; }
-
-        /* Projects */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: rgba(26, 31, 58, 0.4);
-            border: 1px solid rgba(0, 217, 255, 0.1);
-            border-radius: 20px;
-            padding: 2.5rem;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-card::after {
-            content: '';
-            position: absolute;
-            top: 0; right: 0;
-            width: 100px; height: 100px;
-            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .project-card:hover::after { opacity: 0.1; }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
-            box-shadow: 0 20px 50px rgba(0, 217, 255, 0.2);
-        }
-
-        .project-tag {
-            display: inline-block;
-            padding: 0.3rem 1rem;
-            background: rgba(255, 107, 157, 0.1);
-            border: 1px solid var(--accent-warm);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: var(--accent-warm);
-            margin-bottom: 1rem;
-            align-self: flex-start;
-        }
-
-        .project-card h3 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .project-card p {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-            flex-grow: 1;
-        }
-
-        .tech-stack { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
-
-        .tech-tag {
-            padding: 0.3rem 0.8rem;
-            background: rgba(0, 217, 255, 0.1);
-            border-radius: 15px;
-            font-size: 0.85rem;
-            color: var(--accent);
-        }
-
-        .project-links { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: auto; }
-
-        .project-link {
-            padding: 0.6rem 1.5rem;
-            border: 1px solid var(--accent);
-            border-radius: 25px;
-            color: var(--accent);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .project-link:hover {
-            background: var(--accent);
-            color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        /* Skills */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-category {
-            background: rgba(26, 31, 58, 0.4);
-            border: 1px solid rgba(0, 217, 255, 0.1);
-            border-radius: 20px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .skill-category:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .skill-category h3 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.4rem;
-            margin-bottom: 1.5rem;
-            color: var(--accent);
-        }
-
-        .skill-list { display: flex; flex-wrap: wrap; gap: 0.7rem; }
-
-        .skill-item {
-            padding: 0.5rem 1.2rem;
-            background: rgba(0, 217, 255, 0.05);
-            border: 1px solid rgba(0, 217, 255, 0.2);
-            border-radius: 20px;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-        }
-
-        .skill-item:hover {
-            background: rgba(0, 217, 255, 0.1);
-            color: var(--text-primary);
-            transform: translateY(-2px);
-        }
-
-        /* Publications */
-        .publications-list { display: grid; gap: 2rem; }
-
-        .pub-item {
-            background: rgba(26, 31, 58, 0.4);
-            border: 1px solid rgba(0, 217, 255, 0.1);
-            border-radius: 20px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .pub-item::before {
-            content: '📄';
-            position: absolute;
-            right: 2rem; top: 2rem;
-            font-size: 2rem;
-            opacity: 0.3;
-        }
-
-        .pub-item:hover {
-            border-color: var(--accent);
-            transform: translateX(10px);
-        }
-
-        .pub-item h3 {
-            font-size: 1.3rem;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-            padding-right: 3rem;
-        }
-
-        .pub-venue { color: var(--accent-warm); font-weight: 600; margin-bottom: 0.5rem; }
-        .pub-doi { color: var(--text-secondary); font-size: 0.9rem; }
-        .pub-doi a { color: var(--accent); text-decoration: none; }
-        .pub-doi a:hover { text-decoration: underline; }
-
-        /* Contact */
-        .contact-content { text-align: center; max-width: 800px; margin: 0 auto; }
-        .contact-content h2 { margin-bottom: 2rem; }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-top: 3rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1.5rem 2rem;
-            background: rgba(26, 31, 58, 0.4);
-            border: 1px solid rgba(0, 217, 255, 0.1);
-            border-radius: 15px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: var(--text-primary);
-        }
-
-        .contact-item:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
-        }
-
-        .contact-icon { font-size: 1.5rem; }
-
-        footer {
-            text-align: center;
-            padding: 3rem 5%;
-            border-top: 1px solid rgba(0, 217, 255, 0.1);
-            color: var(--text-secondary);
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
-        }
-
-        .scroll-indicator svg { width: 30px; height: 30px; stroke: var(--accent); }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .about-grid { grid-template-columns: 1fr; }
-            .stats { grid-template-columns: 1fr; }
-            .projects-grid { grid-template-columns: 1fr; }
-            .skills-grid { grid-template-columns: 1fr; }
-            .experience-timeline { padding-left: 2rem; }
-            h1 { font-size: 2.5rem; }
-            h2 { font-size: 2rem; }
-        }
-    </style>
-</head>
-<body>
-    <div class="bg-pattern"></div>
-
-    <nav>
-        <div class="container">
-            <div class="logo">CG</div>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#publications">Publications</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-content">
-            <span class="hero-tag">Available for Internships and Full-time Roles 2027</span>
-            <h1>
-                Hey, I'm <span class="gradient-text">Chaturya Ganne</span>
-            </h1>
-            <p class="hero-subtitle">
-                Building intelligent systems with Deep Learning, Computer Vision, and Generative AI.
-                MS in Applied Machine Learning at University of Maryland · GPA 4.0 · 5 peer-reviewed publications including IWSHM 2025 at Stanford.
-            </p>
-            <div class="cta-buttons">
-                <a href="#projects" class="btn btn-primary">View My Work</a>
-                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                <path d="M12 5v14M5 12l7 7 7-7"/>
-            </svg>
-        </div>
-    </section>
-
-    <!-- About -->
-    <section id="about">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Chaturya Ganne | ML & AI Engineer</title><meta name="description" content="Explore Chaturya Ganne's ML and AI projects, research, and practical resources. Computer vision, RAG, agentic AI, and applied optimization. Open to 2027 opportunities."><meta name="author" content="Chaturya Ganne"><meta name="theme-color" content="#0b1220"><link rel="canonical" href="https://chaturyaganne.github.io/portfolio/"><meta property="og:type" content="website"><meta property="og:title" content="Chaturya Ganne | ML & AI Engineer"><meta property="og:description" content="From research to working AI systems. Explore projects, publications, and free project-building resources."><meta property="og:url" content="https://chaturyaganne.github.io/portfolio/"><meta property="og:site_name" content="Chaturya Ganne — Portfolio"><meta property="og:image" content="https://chaturyaganne.github.io/portfolio/personal/share-card.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Chaturya Ganne. ML and AI engineer. Projects, research and practical resources."><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Chaturya Ganne | ML & AI Engineer"><meta name="twitter:description" content="Projects, research, and practical resources for building AI systems."><meta name="twitter:image" content="https://chaturyaganne.github.io/portfolio/personal/share-card.png"><link rel="icon" href="personal/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="personal/site.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Chaturya Ganne","url":"https://chaturyaganne.github.io/portfolio/","jobTitle":"ML/AI Engineer","sameAs":["https://github.com/chaturyaganne","https://www.linkedin.com/in/chaturya-ganne-6b85a7178/","https://scholar.google.com/citations?hl=en&user=SAiN8-oAAAAJ"],"knowsAbout":["Machine Learning","Computer Vision","Retrieval-Augmented Generation","Generative AI"]}</script><script src="personal/site.js" defer></script></head><body><a class="skip-link" href="#main">Skip to content</a><header class="site-header"><div class="container nav-shell"><a class="brand" href="#top" aria-label="Chaturya Ganne, home"><span class="brand-mark">CG<span>↗</span></span><span>Chaturya Ganne<small>ML & AI ENGINEER</small></span></a><button class="menu-toggle" aria-expanded="false" aria-controls="primary-nav" hidden>Menu <span aria-hidden="true">+</span></button><nav id="primary-nav" aria-label="Main navigation"><a href="#projects">Work</a><a href="#experience">Experience</a><a href="#publications">Research</a><a href="#resources">Resources</a><a href="#contact" class="nav-contact">Let's connect ↗</a></nav></div></header><main id="main" tabindex="-1">
+<div class="container"><section class="hero" id="top" aria-labelledby="intro-title"><div class="hero-copy"><div class="availability"><span aria-hidden="true"></span>OPEN TO INTERNSHIPS & FULL-TIME ROLES IN 2027</div><h1 id="intro-title">Intelligent systems.<br><em>Built to be used.</em></h1><p class="hero-intro">I'm <strong>Chaturya Ganne</strong>, an ML/AI engineer and Applied Machine Learning master's student at the University of Maryland. I work across computer vision, retrieval, and agentic AI.</p><div class="hero-actions"><a class="button primary" href="#projects">Explore my work <span aria-hidden="true">↗</span></a><a class="button secondary" href="mailto:cganne@umd.edu">Let's talk</a></div><div class="hero-socials"><a href="https://github.com/chaturyaganne">GitHub ↗</a><a href="https://www.linkedin.com/in/chaturya-ganne-6b85a7178/">LinkedIn ↗</a><a href="https://scholar.google.com/citations?hl=en&user=SAiN8-oAAAAJ">Google Scholar ↗</a></div></div><aside class="focus-panel" aria-labelledby="focus-title"><div class="panel-top"><span>ENGINEERING FOCUS</span><span class="panel-symbol" aria-hidden="true">✳</span></div><h2 id="focus-title">Connect the question<br>to a working system.</h2><p>An illustrative retrieval workflow</p><ol class="system-flow"><li><span>01</span><div><strong>Retrieve</strong><small>Find relevant context</small></div><b aria-hidden="true">↓</b></li><li><span>02</span><div><strong>Reason & generate</strong><small>Build on retrieved evidence</small></div><b aria-hidden="true">↓</b></li><li><span>03</span><div><strong>Evaluate & iterate</strong><small>Inspect quality and trade-offs</small></div><b aria-hidden="true">↗</b></li></ol><div class="panel-bottom"><span>RESEARCH ↔ ENGINEERING</span><span>Always a work in progress.</span></div></aside></section>
+<div class="context-strip"><a href="#education"><span>ACADEMIC FOUNDATION</span><strong>Applied ML @ UMD</strong><small>M.S. candidate · GPA 4.0</small></a><a href="#experience"><span>INDUSTRY EXPERIENCE</span><strong>Enterprise generative AI</strong><small>Daiichi Sankyo · Internship</small></a><a href="#publications"><span>RESEARCH</span><strong>5 publications</strong><small>Computer vision & time-series analysis</small></a></div>
+<section id="projects" class="portfolio-section" aria-labelledby="work-title"><div class="section-heading"><div><span class="eyebrow">01 / SELECTED WORK</span><h2 id="work-title">Explore what I build.</h2></div><p>Working demos, inspectable code, and the decisions behind them.</p></div><div class="filter-bar" role="group" aria-label="Filter selected projects" hidden><button data-filter="all" aria-pressed="true">All projects</button><button data-filter="ml" aria-pressed="false">ML & AI</button><button data-filter="ux" aria-pressed="false">UX exploration</button><span id="filter-count" role="status" aria-live="polite">4 projects</span></div><div class="selected-grid"><article class="work-card" data-category="ml" id="project-medical"><div class="project-art art-medical" aria-hidden="true"><div class="diagram-label">ILLUSTRATIVE MODEL FLOW</div><div class="model-flow"><span>X-ray input</span><i>→</i><span>ResNet50</span><i>→</i><span>Grad-CAM</span></div><div class="heatmap"><span>Prediction</span><span>Explanation</span><span>Report</span></div></div><div class="work-body"><div class="work-kicker"><span>COMPUTER VISION / HEALTHCARE</span><span>01</span></div><h3>AI Medical Diagnosis Tool</h3><p class="work-description">A chest X-ray research prototype that connects image classification, visual explanations, and generated reports.</p><p class="work-detail">ResNet50 classifies images; Grad-CAM surfaces model attention; LLaMA supports report generation.</p><ul class="tech-stack" aria-label="Technologies and focus"><li>PyTorch</li><li>Grad-CAM</li><li>LLaMA</li></ul><div class="work-links"><a href="https://chaturyaganne.github.io/medical_diaganois_tool/">Explore demo <span aria-hidden="true">↗</span></a><a href="https://github.com/chaturyaganne/medical_diaganois_tool">View code <span aria-hidden="true">↗</span></a></div><p class="work-note">Research prototype; not a clinical diagnostic service.</p></div></article><article class="work-card" data-category="ml" id="project-adaptalloc"><div class="project-art art-adaptalloc" aria-hidden="true"><div class="diagram-label">ILLUSTRATIVE ROUTING LOGIC</div><div class="routing"><span>Video frame</span><i>↓</i><strong>Adaptive policy</strong><div><span>YOLOv8<small>Speed / energy</small></span><span>RT-DETR<small>Detection quality</small></span></div></div></div><div class="work-body"><div class="work-kicker"><span>REINFORCEMENT LEARNING / SYSTEMS</span><span>02</span></div><h3>AdaptAlloc</h3><p class="work-description">Choosing an object detector is a trade-off. This project makes that decision frame by frame.</p><p class="work-detail">A REINFORCE policy routes video frames between YOLOv8 and RT-DETR using scene complexity and detection uncertainty.</p><ul class="tech-stack" aria-label="Technologies and focus"><li>REINFORCE</li><li>YOLOv8</li><li>RT-DETR</li></ul><div class="work-links"><a href="https://github.com/chaturyaganne/ADAPTIVE_ALLOC">Explore repository <span aria-hidden="true">↗</span></a></div><p class="work-note">Includes a Streamlit dashboard for comparing routing policies.</p></div></article><article class="work-card" data-category="ml" id="project-radiation"><div class="project-art art-radiation" aria-hidden="true"><div class="diagram-label">ILLUSTRATIVE OPTIMIZATION FLOW</div><div class="constraint-visual"><div><span>Dose constraints</span><span>Coverage objective</span><span>Regularization</span></div><strong>Convex<br>program</strong><b>→</b><span>Candidate<br>fluence plan</span></div></div><div class="work-body"><div class="work-kicker"><span>CONVEX OPTIMIZATION / RESEARCH</span><span>03</span></div><h3>Radiation Treatment Planner</h3><p class="work-description">Exploring how mathematical constraints shape a radiation treatment plan.</p><p class="work-detail">A CVXPY formulation on PortPy data balances dose constraints with a spectral regularizer for fluence optimization.</p><ul class="tech-stack" aria-label="Technologies and focus"><li>CVXPY</li><li>PortPy</li><li>Optimization</li></ul><div class="work-links"><a href="https://github.com/chaturyaganne/Radiation_Treatment_Planning_Optimiser">Explore repository <span aria-hidden="true">↗</span></a></div><p class="work-note">Research implementation; not a treatment-planning service.</p></div></article><article class="work-card" data-category="ux" id="project-encore"><div class="project-art art-encore" aria-hidden="true"><div class="diagram-label">INDEPENDENT UX CONCEPT</div><div class="encore-preview"><b>encore<span>✳</span></b><p>A great night.<br>A shared plan.</p><div><span>4 friends</span><span>$100 each</span><span>Clear view</span></div></div></div><div class="work-body"><div class="work-kicker"><span>UX EXPLORATION / INTERACTION DESIGN</span><span>04</span></div><h3>Encore</h3><p class="work-description">One night out. Everyone on the same page. A group-first ticket-planning concept.</p><p class="work-detail">An interactive journey from shared needs to seat comparison, exact pricing, and a plan the group can share.</p><ul class="tech-stack" aria-label="Technologies and focus"><li>UX case study</li><li>Prototype</li><li>Design system</li></ul><div class="work-links"><a href="encore/">View separate project <span aria-hidden="true">↗</span></a><a href="encore/prototype.html">Try prototype <span aria-hidden="true">↗</span></a></div><p class="work-note">Fictional inventory. User research is planned, not completed.</p></div></article></div><details class="archive"><summary>More engineering work & technical detail <span aria-hidden="true">+</span></summary><section id="project-archive">
         <div class="section-header">
-            <span class="section-tag">Get to Know Me</span>
-            <h2>About Me</h2>
-        </div>
-        <div class="about-grid">
-            <div class="about-text">
-                <p>
-                    I'm an ML/AI Engineer and MS Applied Machine Learning candidate (GPA 4.0) at the University of Maryland,
-                    with production experience building and deploying AI systems across computer vision, NLP, and generative AI.
-                </p>
-                <p>
-                    I architect transformer and diffusion models in PyTorch, build RL-driven agentic pipelines with LangChain,
-                    and ship end-to-end MLOps workflows with MLflow and Docker — translating research into real, measurable impact.
-                </p>
-                <p>
-                    My work has been published at prestigious conferences including IWSHM 2025 at Stanford University.
-                    I'm passionate about applying ML to high-stakes domains like healthcare and safety-critical systems.
-                </p>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <div class="stat-number">5+</div>
-                    <div class="stat-label">Publications</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">8+</div>
-                    <div class="stat-label">ML Projects</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">4.0</div>
-                    <div class="stat-label">GPA at UMD</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">25%</div>
-                    <div class="stat-label">Throughput Boost</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Education -->
-    <section id="education">
-        <div class="section-header">
-            <span class="section-tag">Academic Background</span>
-            <h2>Education</h2>
-        </div>
-        <div class="education-cards">
-            <div class="edu-card">
-                <div class="edu-header">
-                    <div>
-                        <h3>University of Maryland, College Park</h3>
-                        <div class="degree">M.S., Applied Machine Learning</div>
-                        <div class="gpa">GPA: 4.0 / 4.0</div>
-                    </div>
-                    <div class="edu-date">Aug 2025 – Present</div>
-                </div>
-                <div class="coursework">
-                    <div class="coursework-label">Coursework:</div>
-                    <div class="coursework-list">Optimization of ML Algorithms, Principles of Machine Learning, Computing Systems for ML, Probability & Statistics, Principles of Data Science</div>
-                </div>
-            </div>
-            <div class="edu-card">
-                <div class="edu-header">
-                    <div>
-                        <h3>Mahindra University, Hyderabad</h3>
-                        <div class="degree">B.Tech., Computer Science Engineering</div>
-                    </div>
-                    <div class="edu-date">Aug 2021 – Jun 2025</div>
-                </div>
-                <div class="coursework">
-                    <div class="coursework-label">Coursework:</div>
-                    <div class="coursework-list">Data Structures & Algorithms, Deep Learning, Computer Vision</div>
-                </div>
-                <div class="coursework" style="border-top: none; padding-top: 0.5rem;">
-                    <div class="coursework-label" style="color: var(--accent-warm);">Awards:</div>
-                    <div class="coursework-list">Merit Scholarship all four years · IET Member since Apr 2023 · Presented at ICRESH 2024, BARC Mumbai</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience -->
-    <section id="experience">
-        <div class="section-header">
-            <span class="section-tag">Professional Journey</span>
-            <h2>Experience</h2>
-        </div>
-        <div class="experience-timeline">
-            <div class="exp-item">
-                <div class="exp-header">
-                    <h3>Global Development Information Management Intern</h3>
-                    <div class="company">Daiichi Sankyo</div>
-                    <div class="exp-date">Jun 2026 – Present | Basking Ridge, NJ</div>
-                </div>
-                <ul>
-                    <li>Developing enterprise Generative AI solutions for global data governance and information management initiatives supporting pharmaceutical operations.</li>
-                    <li>Architecting production-grade Retrieval-Augmented Generation (RAG) systems using OpenSearch, vector retrieval, reranking pipelines, LangChain, LangGraph, embeddings, REST APIs, SQL, and large language models to enable intelligent search across enterprise documentation.</li>
-                    <li>Building scalable AI applications and knowledge discovery workflows using FastAPI, document processing pipelines, interactive user interfaces, and visualization tools to improve information accessibility and operational efficiency.</li>
-                </ul>
-            </div>
-            <div class="exp-item">
-                <div class="exp-header">
-                    <h3>Data Science Intern</h3>
-                    <div class="company">AwoneDataSciences</div>
-                    <div class="exp-date">Jun 2024 – Aug 2024 | Hyderabad, India</div>
-                </div>
-                <ul>
-                    <li>Architected and fine-tuned transformer and diffusion models in PyTorch, boosting image processing throughput by <strong>25%</strong> across high-resolution datasets.</li>
-                    <li>Engineered a virtual call assistant for e-commerce customer support integrating STT/TTS and NLP, reducing real-time inference latency by <strong>150 ms</strong>.</li>
-                    <li>Optimized Groq model workloads using operations research techniques, achieving <strong>2× acceleration</strong> in production inference speed.</li>
-                    <li>Deployed document Q&A solutions backed by SQL data mining, cutting manual data search time by approximately <strong>40%</strong>.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects -->
-    <section id="projects">
-        <div class="section-header">
-            <span class="section-tag">Featured Work</span>
-            <h2>Projects</h2>
+            <span class="section-tag">FROM MY ENGINEERING PORTFOLIO</span>
+            <h3>Project details & additional work</h3>
         </div>
         <div class="projects-grid">
 
@@ -831,8 +25,8 @@
                     <span class="tech-tag">Hugging Face</span>
                 </div>
                 <div class="project-links">
-                    <a href="https://chaturyaganne.github.io/medical_diaganois_tool/" target="_blank" class="project-link">Live Demo</a>
-                    <a href="https://github.com/chaturyaganne/medical_diaganois_tool" target="_blank" class="project-link">GitHub</a>
+                    <a href="https://chaturyaganne.github.io/medical_diaganois_tool/" target="_blank" rel="noopener noreferrer" class="project-link">Live Demo</a>
+                    <a href="https://github.com/chaturyaganne/medical_diaganois_tool" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
                 </div>
             </div>
 
@@ -854,7 +48,7 @@
                     <span class="tech-tag">Docker</span>
                 </div>
                 <div class="project-links">
-                    <a href="https://github.com/chaturyaganne/ADAPTIVE_ALLOC" target="_blank" class="project-link">GitHub</a>
+                    <a href="https://github.com/chaturyaganne/ADAPTIVE_ALLOC" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
                 </div>
             </div>
 
@@ -876,7 +70,7 @@
                     <span class="tech-tag">Spectral Regularization</span>
                 </div>
                 <div class="project-links">
-                    <a href="https://github.com/chaturyaganne/Radiation_Treatment_Planning_Optimiser" target="_blank" class="project-link">GitHub</a>
+                    <a href="https://github.com/chaturyaganne/Radiation_Treatment_Planning_Optimiser" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
                 </div>
             </div>
 
@@ -915,7 +109,7 @@
                     <span class="tech-tag">Docker</span>
                 </div>
                 <div class="project-links">
-                    <a href="https://github.com/chaturyaganne" target="_blank" class="project-link">GitHub</a>
+                    <a href="https://github.com/chaturyaganne" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
                 </div>
             </div>
 
@@ -937,10 +131,80 @@
             </div>
 
         </div>
-    </section>
-
-    <!-- Skills -->
-    <section id="skills">
+    </section></details></section>
+<section id="resources" class="portfolio-section resources" aria-labelledby="resources-title"><div class="section-heading"><div><span class="eyebrow">02 / BUILD SOMETHING OF YOUR OWN</span><h2 id="resources-title">Take something useful.</h2></div><p>Free, ungated starting points for documenting, reviewing, and testing your next project.</p></div><div class="resource-grid"><a class="resource-card" href="personal/resources/project-case-study-template.md" download><span class="resource-format">TEMPLATE / MARKDOWN</span><h3>Tell your project's story.</h3><p>A structure for explaining the problem, your contribution, evaluation, and trade-offs.</p><span class="resource-cta">Download case-study template ↓</span></a><a class="resource-card" href="personal/resources/ai-project-review-checklist.md" download><span class="resource-format">CHECKLIST / MARKDOWN</span><h3>Review before you share.</h3><p>Questions about data, baselines, retrieval, evaluation, failure modes, and reproducibility.</p><span class="resource-cta">Download AI review checklist ↓</span></a><a class="resource-card" href="encore/research-kit.md"><span class="resource-format">UX / RESEARCH PLAN</span><h3>Plan a usability session.</h3><p>The proposed moderator guide and observation structure from the Encore concept.</p><span class="resource-cta">Read the research kit ↗</span></a></div><div class="resource-footer"><p>Working templates, not published research findings. Adapt them to your own project.</p><button class="text-button" data-copy="resources">Copy resources link ↗</button></div></section>
+<div class="background-grid"><div><section id="about" class="portfolio-section about" aria-labelledby="about-title"><span class="eyebrow">03 / A LITTLE CONTEXT</span><h2 id="about-title">Research curiosity.<br>Engineering follow-through.</h2><p>I build across computer vision, NLP, and generative AI, with experience in transformer and diffusion models, retrieval pipelines, and end-to-end ML workflows.</p><p>I'm especially interested in applications where understanding the model's behavior matters as much as getting it to run. My work spans healthcare research, infrastructure monitoring, and enterprise information discovery.</p><p>I'm now pursuing my M.S. in Applied Machine Learning at the University of Maryland and exploring internship and full-time opportunities for 2027.</p></section><section id="education">
+        <div class="section-header">
+            <span class="section-tag">Academic Background</span>
+            <h2>Education</h2>
+        </div>
+        <div class="education-cards">
+            <div class="edu-card">
+                <div class="edu-header">
+                    <div>
+                        <h3>University of Maryland, College Park</h3>
+                        <div class="degree">M.S., Applied Machine Learning</div>
+                        <div class="gpa">GPA: 4.0 / 4.0</div>
+                    </div>
+                    <div class="edu-date">Aug 2025 – Present</div>
+                </div>
+                <div class="coursework">
+                    <div class="coursework-label">Coursework:</div>
+                    <div class="coursework-list">Optimization of ML Algorithms, Principles of Machine Learning, Computing Systems for ML, Probability & Statistics, Principles of Data Science</div>
+                </div>
+            </div>
+            <div class="edu-card">
+                <div class="edu-header">
+                    <div>
+                        <h3>Mahindra University, Hyderabad</h3>
+                        <div class="degree">B.Tech., Computer Science Engineering</div>
+                    </div>
+                    <div class="edu-date">Aug 2021 – Jun 2025</div>
+                </div>
+                <div class="coursework">
+                    <div class="coursework-label">Coursework:</div>
+                    <div class="coursework-list">Data Structures & Algorithms, Deep Learning, Computer Vision</div>
+                </div>
+                <div class="coursework">
+                    <div class="coursework-label">Awards:</div>
+                    <div class="coursework-list">Merit Scholarship all four years · IET Member since Apr 2023 · Presented at ICRESH 2024, BARC Mumbai</div>
+                </div>
+            </div>
+        </div>
+    </section></div><div><section id="experience">
+        <div class="section-header">
+            <span class="section-tag">Professional Journey</span>
+            <h2>Experience</h2>
+        </div>
+        <div class="experience-timeline">
+            <div class="exp-item">
+                <div class="exp-header">
+                    <h3>Global Development Information Management Intern</h3>
+                    <div class="company">Daiichi Sankyo</div>
+                    <div class="exp-date">Jun 2026 – Present | Basking Ridge, NJ</div>
+                </div>
+                <ul>
+                    <li>Developing enterprise Generative AI solutions for global data governance and information management initiatives supporting pharmaceutical operations.</li>
+                    <li>Architecting production-grade Retrieval-Augmented Generation (RAG) systems using OpenSearch, vector retrieval, reranking pipelines, LangChain, LangGraph, embeddings, REST APIs, SQL, and large language models to enable intelligent search across enterprise documentation.</li>
+                    <li>Building scalable AI applications and knowledge discovery workflows using FastAPI, document processing pipelines, interactive user interfaces, and visualization tools to improve information accessibility and operational efficiency.</li>
+                </ul>
+            </div>
+            <div class="exp-item">
+                <div class="exp-header">
+                    <h3>Data Science Intern</h3>
+                    <div class="company">AwoneDataSciences</div>
+                    <div class="exp-date">Jun 2024 – Aug 2024 | Hyderabad, India</div>
+                </div>
+                <ul>
+                    <li>Architected and fine-tuned transformer and diffusion models in PyTorch, boosting image processing throughput by <strong>25%</strong> across high-resolution datasets.</li>
+                    <li>Engineered a virtual call assistant for e-commerce customer support integrating STT/TTS and NLP, reducing real-time inference latency by <strong>150 ms</strong>.</li>
+                    <li>Optimized Groq model workloads using operations research techniques, achieving <strong>2× acceleration</strong> in production inference speed.</li>
+                    <li>Deployed document Q&A solutions backed by SQL data mining, cutting manual data search time by approximately <strong>40%</strong>.</li>
+                </ul>
+            </div>
+        </div>
+    </section></div></div>
+<section id="skills">
         <div class="section-header">
             <span class="section-tag">Technical Expertise</span>
             <h2>Skills</h2>
@@ -1014,10 +278,7 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Publications -->
-    <section id="publications">
+    </section><section id="publications">
         <div class="section-header">
             <span class="section-tag">Research Contributions</span>
             <h2>Publications & Achievements</h2>
@@ -1026,12 +287,12 @@
             <div class="pub-item">
                 <h3>Smart Railway Safety: Integrating Deep Learning with Vision Transformers for Obstacle Detection and Track Health Monitoring</h3>
                 <div class="pub-venue">IWSHM 2025 · Stanford University</div>
-                <div class="pub-doi">doi: <a href="https://doi.org/10.12783/shm2025/37360" target="_blank">10.12783/shm2025/37360</a></div>
+                <div class="pub-doi">doi: <a href="https://doi.org/10.12783/shm2025/37360" target="_blank" rel="noopener noreferrer">10.12783/shm2025/37360</a></div>
             </div>
             <div class="pub-item">
                 <h3>AI-Driven Railway Maintenance for Fault Identification Through Object Detection and Segmentation</h3>
                 <div class="pub-venue">IWSHM 2025 · Stanford University</div>
-                <div class="pub-doi">doi: <a href="https://doi.org/10.12783/shm2025/37361" target="_blank">10.12783/shm2025/37361</a></div>
+                <div class="pub-doi">doi: <a href="https://doi.org/10.12783/shm2025/37361" target="_blank" rel="noopener noreferrer">10.12783/shm2025/37361</a></div>
             </div>
             <div class="pub-item">
                 <h3>Predicting Duration of Vertical Ground Motions for the Himalayan Region Using Machine Learning Techniques</h3>
@@ -1047,83 +308,13 @@
             </div>
         </div>
 
-        <div style="margin-top: 3rem; padding: 2rem; background: rgba(0, 217, 255, 0.05); border-radius: 20px; border: 1px solid rgba(0, 217, 255, 0.1);">
-            <h3 style="color: var(--accent); margin-bottom: 1rem; font-family: 'DM Serif Display', serif; font-size: 1.5rem;">Awards & Recognition</h3>
-            <ul style="color: var(--text-secondary); line-height: 2; padding-left: 1.5rem;">
+        <div>
+            <h3>Awards & Recognition</h3>
+            <ul>
                 <li>Member of IET (Institution of Engineering and Technology) since April 2023</li>
                 <li>Merit Scholarship recipient all four academic years at Mahindra University</li>
                 <li>Presented research paper at ICRESH 2024 at Bhabha Atomic Research Centre (BARC), Mumbai</li>
             </ul>
         </div>
     </section>
-
-    <!-- Contact -->
-    <section id="contact">
-        <div class="contact-content">
-            <span class="section-tag">Let's Connect</span>
-            <h2>Get In Touch</h2>
-            <p class="section-description" style="margin: 0 auto 2rem;">
-                I'm actively seeking full-time opportunities for 2027. Let's discuss how I can contribute to your team!
-            </p>
-            <div class="contact-info">
-                <a href="mailto:cganne@umd.edu" class="contact-item">
-                    <span class="contact-icon">✉️</span>
-                    <span>cganne@umd.edu</span>
-                </a>
-                <a href="https://github.com/chaturyaganne" target="_blank" class="contact-item">
-                    <span class="contact-icon">💻</span>
-                    <span>GitHub</span>
-                </a>
-                <a href="https://www.linkedin.com/in/chaturya-ganne-6b85a7178/" target="_blank" class="contact-item">
-                    <span class="contact-icon">💼</span>
-                    <span>LinkedIn</span>
-                </a>
-                <a href="https://scholar.google.com/citations?hl=en&user=SAiN8-oAAAAJ" target="_blank" class="contact-item">
-                    <span class="contact-icon">🎓</span>
-                    <span>Google Scholar</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; Chaturya Ganne. All rights reserved.</p>
-    </footer>
-
-    <script>
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        });
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-        document.querySelectorAll('section').forEach(section => observer.observe(section));
-
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section[id]');
-            const scrollY = window.pageYOffset;
-            sections.forEach(section => {
-                const sectionHeight = section.offsetHeight;
-                const sectionTop = section.offsetTop - 100;
-                const sectionId = section.getAttribute('id');
-                const navLink = document.querySelector(`.nav-links a[href="#${sectionId}"]`);
-                if (navLink && scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                    document.querySelectorAll('.nav-links a').forEach(link => link.style.color = 'var(--text-secondary)');
-                    navLink.style.color = 'var(--accent)';
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+<section id="contact" class="portfolio-section contact" aria-labelledby="contact-title"><div><span class="eyebrow">LET'S BUILD SOMETHING WORTH USING</span><h2 id="contact-title">Have a problem<br>worth exploring?</h2><p>I'm open to 2027 opportunities in ML/AI engineering and conversations about applied research, useful products, and collaboration.</p><a class="button primary" href="mailto:cganne@umd.edu">Email me ↗</a><a class="plain-email" href="mailto:cganne@umd.edu">cganne@umd.edu</a></div><div class="contact-links"><a href="https://www.linkedin.com/in/chaturya-ganne-6b85a7178/">Connect on LinkedIn <span>↗</span></a><a href="https://github.com/chaturyaganne">Explore GitHub <span>↗</span></a><a href="https://scholar.google.com/citations?hl=en&user=SAiN8-oAAAAJ">Read my research <span>↗</span></a><button data-copy="portfolio">Copy portfolio link <span>↗</span></button></div></section></div></main><footer class="container site-footer"><p>© Chaturya Ganne · Built with curiosity.</p><a href="#top">Back to top ↑</a></footer><div class="copy-notice" id="copy-notice" hidden><label for="copy-fallback">Copy this link</label><input id="copy-fallback" readonly><button type="button" id="close-copy">Close</button></div><p id="site-status" class="sr-only" role="status" aria-live="polite"></p></body></html>
