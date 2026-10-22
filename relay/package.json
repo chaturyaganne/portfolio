@@ -1,0 +1,17 @@
+{
+  "name": "relay-fde-demo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Grounded service triage with evidence, review gates and an optional local model adapter",
+  "scripts": {
+    "start": "node server.cjs",
+    "build": "node build.cjs",
+    "test": "node --test tests.cjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "jsdom": "26.1.0"
+  }
+}
