@@ -101,6 +101,15 @@ Fourteen Python checks cover input accounting, idempotence, foreign keys, late a
 
 The test-driven work exposed an SQLite connection-lifecycle issue on Windows; connections are now explicitly closed through a scoped session helper. Rollback tests deliberately inject a stage failure and verify that previously committed data stays intact.
 
+The optional dashboard DOM checks use Node and a development-only jsdom package:
+
+```bash
+npm install
+npm run test:dashboard
+```
+
+The pipeline, local API and browser application have no third-party runtime packages. The DOM checks mock the native dialog and load the generated fixture snapshot; they do not establish visual layout or assistive-technology behavior.
+
 ## Tool and evidence boundaries
 
 This project implements a **local SQLite warehouse**. It does not claim deployment to Snowflake, BigQuery, Redshift, or a cloud account. It uses Python CSV ingestion rather than claiming experience with Airbyte, Fivetran, Stitch, or Talend. No Airflow/Dagster deployment is included. Those are reasonable next integration steps, not completed work.

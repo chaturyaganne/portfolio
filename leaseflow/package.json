@@ -1,0 +1,6 @@
+{
+  "name":"leaseflow-dashboard-checks",
+  "private":true,
+  "scripts":{"test:dashboard":"node --test dashboard-tests.cjs"},
+  "devDependencies":{"jsdom":"26.1.0"}
+}

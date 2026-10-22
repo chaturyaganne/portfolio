@@ -1,4 +1,6 @@
 var/
+tmp/
+node_modules/
 __pycache__/
 *.db
 *.db-shm
