@@ -1,0 +1,5 @@
+property_id,city,state,unit_count,updated_at
+P001,New York,NY,100,2026-10-01T09:00:00Z
+P002,Jersey City,NJ,80,2026-10-01T09:00:00Z
+P003,Brooklyn,NY,120,2026-10-01T09:00:00Z
+P004,,NY,50,2026-10-01T09:00:00Z

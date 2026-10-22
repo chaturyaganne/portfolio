@@ -1,0 +1,12 @@
+PRAGMA foreign_keys=ON;
+CREATE TABLE IF NOT EXISTS runs(run_id TEXT PRIMARY KEY, started_at TEXT NOT NULL, finished_at TEXT, status TEXT NOT NULL, error TEXT, metrics_json TEXT);
+CREATE TABLE IF NOT EXISTS bronze_records(source TEXT NOT NULL, row_hash TEXT NOT NULL, payload_json TEXT NOT NULL, first_seen_run TEXT NOT NULL, PRIMARY KEY(source,row_hash));
+CREATE TABLE IF NOT EXISTS properties(property_id TEXT PRIMARY KEY,city TEXT NOT NULL,state TEXT NOT NULL,unit_count INTEGER NOT NULL CHECK(unit_count>0),updated_at TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS leases(lease_id TEXT PRIMARY KEY,property_id TEXT NOT NULL REFERENCES properties(property_id),monthly_rent_cents INTEGER NOT NULL CHECK(monthly_rent_cents>0),start_date TEXT NOT NULL,end_date TEXT NOT NULL CHECK(end_date>=start_date),updated_at TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS payments(payment_id TEXT PRIMARY KEY,lease_id TEXT NOT NULL REFERENCES leases(lease_id),amount_cents INTEGER NOT NULL CHECK(amount_cents>=0),paid_at TEXT NOT NULL,updated_at TEXT NOT NULL);
+CREATE INDEX IF NOT EXISTS ix_leases_property ON leases(property_id);
+CREATE INDEX IF NOT EXISTS ix_payments_lease_date ON payments(lease_id,paid_at);
+CREATE TABLE IF NOT EXISTS issues(issue_id TEXT PRIMARY KEY,source TEXT NOT NULL,entity_id TEXT,rule TEXT NOT NULL,severity TEXT NOT NULL,message TEXT NOT NULL,payload_json TEXT NOT NULL,first_seen_run TEXT NOT NULL,last_seen_run TEXT NOT NULL,active INTEGER NOT NULL DEFAULT 1);
+CREATE TABLE IF NOT EXISTS row_outcomes(run_id TEXT NOT NULL,source TEXT NOT NULL,line_number INTEGER NOT NULL,entity_id TEXT,outcome TEXT NOT NULL,row_hash TEXT NOT NULL,PRIMARY KEY(run_id,source,line_number));
+CREATE TABLE IF NOT EXISTS watermarks(source TEXT PRIMARY KEY,max_accepted_updated_at TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS notes(note_id INTEGER PRIMARY KEY AUTOINCREMENT,issue_id TEXT NOT NULL REFERENCES issues(issue_id),text TEXT NOT NULL,created_at TEXT NOT NULL,updated_at TEXT NOT NULL);

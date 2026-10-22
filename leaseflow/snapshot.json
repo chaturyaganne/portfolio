@@ -1,0 +1,289 @@
+{
+  "generated_at": "2026-10-22T16:59:24+00:00",
+  "data_scope": "Synthetic fixture records only. No real renter data or underwriting decisions.",
+  "counts": {
+    "properties": 3,
+    "leases": 4,
+    "payments": 6,
+    "bronze_records": 20
+  },
+  "runs": [
+    {
+      "run_id": "c51be4b3ee354135b2b9ecb0d4fa9e25",
+      "started_at": "2026-10-22T16:59:24+00:00",
+      "finished_at": "2026-10-22T16:59:24+00:00",
+      "status": "success",
+      "error": null,
+      "metrics": {
+        "duplicate": 1,
+        "elapsed_ms": 39.59,
+        "inserted": 0,
+        "quarantined": 7,
+        "read": 21,
+        "stale": 0,
+        "unchanged": 13,
+        "updated": 0
+      }
+    },
+    {
+      "run_id": "fc30de053ed74170bd072909ab0a84b8",
+      "started_at": "2026-10-22T16:59:24+00:00",
+      "finished_at": "2026-10-22T16:59:24+00:00",
+      "status": "success",
+      "error": null,
+      "metrics": {
+        "duplicate": 1,
+        "elapsed_ms": 29.57,
+        "inserted": 13,
+        "quarantined": 7,
+        "read": 21,
+        "stale": 0,
+        "unchanged": 0,
+        "updated": 0
+      }
+    }
+  ],
+  "issues": [
+    {
+      "issue_id": "9892763f24dbfdbb0d7b",
+      "source": "leases",
+      "entity_id": "L006",
+      "rule": "amount",
+      "severity": "error",
+      "message": "monthly_rent_cents must be a positive integer.",
+      "payload_json": "{\"end_date\":\"2027-08-31\",\"lease_id\":\"L006\",\"monthly_rent_cents\":\"-100\",\"property_id\":\"P003\",\"start_date\":\"2026-09-01\",\"updated_at\":\"2026-10-01T10:00:00Z\"}",
+      "first_seen_run": "fc30de053ed74170bd072909ab0a84b8",
+      "last_seen_run": "c51be4b3ee354135b2b9ecb0d4fa9e25",
+      "active": 1
+    },
+    {
+      "issue_id": "d25633eb44101fdb343c",
+      "source": "leases",
+      "entity_id": "L007",
+      "rule": "date_order",
+      "severity": "error",
+      "message": "Lease dates must be ISO dates with end_date >= start_date.",
+      "payload_json": "{\"end_date\":\"2026-09-01\",\"lease_id\":\"L007\",\"monthly_rent_cents\":\"200000\",\"property_id\":\"P002\",\"start_date\":\"2027-08-31\",\"updated_at\":\"2026-10-01T10:00:00Z\"}",
+      "first_seen_run": "fc30de053ed74170bd072909ab0a84b8",
+      "last_seen_run": "c51be4b3ee354135b2b9ecb0d4fa9e25",
+      "active": 1
+    },
+    {
+      "issue_id": "181ffe6a9a11d9a240de",
+      "source": "leases",
+      "entity_id": "L005",
+      "rule": "foreign_key",
+      "severity": "error",
+      "message": "property_id is not available in curated properties.",
+      "payload_json": "{\"end_date\":\"2027-08-31\",\"lease_id\":\"L005\",\"monthly_rent_cents\":\"190000\",\"property_id\":\"P404\",\"start_date\":\"2026-09-01\",\"updated_at\":\"2026-10-01T10:00:00Z\"}",
+      "first_seen_run": "fc30de053ed74170bd072909ab0a84b8",
+      "last_seen_run": "c51be4b3ee354135b2b9ecb0d4fa9e25",
+      "active": 1
+    },
+    {
+      "issue_id": "804cc4c0f2ca86da766d",
+      "source": "payments",
+      "entity_id": "E006",
+      "rule": "amount",
+      "severity": "error",
+      "message": "amount_cents must be a non-negative integer.",
+      "payload_json": "{\"amount_cents\":\"not-an-integer\",\"lease_id\":\"L003\",\"paid_at\":\"2026-10-01\",\"payment_id\":\"E006\",\"updated_at\":\"2026-10-02T09:00:00Z\"}",
+      "first_seen_run": "fc30de053ed74170bd072909ab0a84b8",
+      "last_seen_run": "c51be4b3ee354135b2b9ecb0d4fa9e25",
+      "active": 1
+    },
+    {
+      "issue_id": "6a483f97d213c167a4f3",
+      "source": "payments",
+      "entity_id": "E008",
+      "rule": "amount",
+      "severity": "error",
+      "message": "amount_cents must be a non-negative integer.",
+      "payload_json": "{\"amount_cents\":\"-10\",\"lease_id\":\"L004\",\"paid_at\":\"2026-10-01\",\"payment_id\":\"E008\",\"updated_at\":\"2026-10-02T09:00:00Z\"}",
+      "first_seen_run": "fc30de053ed74170bd072909ab0a84b8",
+      "last_seen_run": "c51be4b3ee354135b2b9ecb0d4fa9e25",
+      "active": 1
+    },
+    {
+      "issue_id": "6ddaf1200df7e7ca9399",
+      "source": "payments",
+      "entity_id": "E007",
+      "rule": "foreign_key",
+      "severity": "error",
+      "message": "lease_id is not available in curated leases.",
+      "payload_json": "{\"amount_cents\":\"50000\",\"lease_id\":\"L888\",\"paid_at\":\"2026-10-01\",\"payment_id\":\"E007\",\"updated_at\":\"2026-10-02T09:00:00Z\"}",
+      "first_seen_run": "fc30de053ed74170bd072909ab0a84b8",
+      "last_seen_run": "c51be4b3ee354135b2b9ecb0d4fa9e25",
+      "active": 1
+    },
+    {
+      "issue_id": "678d8f0426352b547002",
+      "source": "properties",
+      "entity_id": "P004",
+      "rule": "required",
+      "severity": "error",
+      "message": "city is required.",
+      "payload_json": "{\"city\":\"\",\"property_id\":\"P004\",\"state\":\"NY\",\"unit_count\":\"50\",\"updated_at\":\"2026-10-01T09:00:00Z\"}",
+      "first_seen_run": "fc30de053ed74170bd072909ab0a84b8",
+      "last_seen_run": "c51be4b3ee354135b2b9ecb0d4fa9e25",
+      "active": 1
+    },
+    {
+      "issue_id": "b62f0fd8afab3aaad1a4",
+      "source": "leases",
+      "entity_id": "L002",
+      "rule": "duplicate",
+      "severity": "warning",
+      "message": "Repeated identical row in this batch; retained once.",
+      "payload_json": "{\"end_date\":\"2027-08-31\",\"lease_id\":\"L002\",\"monthly_rent_cents\":\"280000\",\"property_id\":\"P001\",\"start_date\":\"2026-09-01\",\"updated_at\":\"2026-10-01T10:00:00Z\"}",
+      "first_seen_run": "fc30de053ed74170bd072909ab0a84b8",
+      "last_seen_run": "c51be4b3ee354135b2b9ecb0d4fa9e25",
+      "active": 1
+    }
+  ],
+  "source_outcomes": [
+    {
+      "source": "leases",
+      "outcome": "duplicate",
+      "count": 1
+    },
+    {
+      "source": "leases",
+      "outcome": "quarantined",
+      "count": 3
+    },
+    {
+      "source": "leases",
+      "outcome": "unchanged",
+      "count": 4
+    },
+    {
+      "source": "payments",
+      "outcome": "quarantined",
+      "count": 3
+    },
+    {
+      "source": "payments",
+      "outcome": "unchanged",
+      "count": 6
+    },
+    {
+      "source": "properties",
+      "outcome": "quarantined",
+      "count": 1
+    },
+    {
+      "source": "properties",
+      "outcome": "unchanged",
+      "count": 3
+    }
+  ],
+  "property_summary": [
+    {
+      "property_id": "P001",
+      "city": "New York",
+      "state": "NY",
+      "unit_count": 100,
+      "lease_count": 2,
+      "monthly_rent_cents": 520000,
+      "payment_count": 3,
+      "payment_amount_cents": 620000
+    },
+    {
+      "property_id": "P002",
+      "city": "Jersey City",
+      "state": "NJ",
+      "unit_count": 80,
+      "lease_count": 1,
+      "monthly_rent_cents": 210000,
+      "payment_count": 2,
+      "payment_amount_cents": 210000
+    },
+    {
+      "property_id": "P003",
+      "city": "Brooklyn",
+      "state": "NY",
+      "unit_count": 120,
+      "lease_count": 1,
+      "monthly_rent_cents": 310000,
+      "payment_count": 1,
+      "payment_amount_cents": 310000
+    }
+  ],
+  "property_day": [
+    {
+      "property_id": "P001",
+      "activity_date": "2026-09-15",
+      "payment_count": 1,
+      "payment_amount_cents": 100000,
+      "distinct_leases": 1
+    },
+    {
+      "property_id": "P001",
+      "activity_date": "2026-10-01",
+      "payment_count": 2,
+      "payment_amount_cents": 520000,
+      "distinct_leases": 2
+    },
+    {
+      "property_id": "P002",
+      "activity_date": "2026-10-01",
+      "payment_count": 1,
+      "payment_amount_cents": 210000,
+      "distinct_leases": 1
+    },
+    {
+      "property_id": "P003",
+      "activity_date": "2026-10-01",
+      "payment_count": 1,
+      "payment_amount_cents": 310000,
+      "distinct_leases": 1
+    },
+    {
+      "property_id": "P002",
+      "activity_date": "2026-10-02",
+      "payment_count": 1,
+      "payment_amount_cents": 0,
+      "distinct_leases": 1
+    }
+  ],
+  "watermarks": [
+    {
+      "source": "leases",
+      "max_accepted_updated_at": "2026-10-01T10:00:00.000000+00:00"
+    },
+    {
+      "source": "payments",
+      "max_accepted_updated_at": "2026-10-10T09:00:00.000000+00:00"
+    },
+    {
+      "source": "properties",
+      "max_accepted_updated_at": "2026-10-01T09:00:00.000000+00:00"
+    }
+  ],
+  "demonstration": {
+    "first_run": {
+      "run_id": "fc30de053ed74170bd072909ab0a84b8",
+      "read": 21,
+      "inserted": 13,
+      "updated": 0,
+      "unchanged": 0,
+      "stale": 0,
+      "duplicate": 1,
+      "quarantined": 7,
+      "elapsed_ms": 29.57
+    },
+    "repeat_run": {
+      "run_id": "c51be4b3ee354135b2b9ecb0d4fa9e25",
+      "read": 21,
+      "inserted": 0,
+      "updated": 0,
+      "unchanged": 13,
+      "stale": 0,
+      "duplicate": 1,
+      "quarantined": 7,
+      "elapsed_ms": 39.59
+    },
+    "note": "Observed on the checked-in synthetic fixtures. Not a production workload or business outcome."
+  }
+}
